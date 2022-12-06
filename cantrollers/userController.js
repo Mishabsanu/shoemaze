@@ -36,17 +36,17 @@ const userController = {
         console.log(process.env.client_id,
             process.env.client_secret);
 
-        let todayDate = new Date().toISOString().slice(0, 10);
-        let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
-        let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
-        let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
+        //let todayDate = new Date().toISOString().slice(0, 10);
+        // let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
+        // let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
+        // let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
         try {
             if (req.session.loggedIn) {
                 let userss = req.session.user
                 let todayDate = new Date().toISOString().slice(0, 10);
-                let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
-                let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
-                let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
+                // let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
+                // let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
+                // let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
                 let person = await userHelpers.getUser(userss._id)
                 let cartCount = null
                 if (req.session.user) {
