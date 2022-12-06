@@ -4,10 +4,8 @@ const adminHelpers = require('../helpers/admin-helpers')
 const userHelpers = require('../helpers/user-helpers')
 const productHelpers = require('../helpers/product-helpers')
 const categoryHelpers = require('../helpers/category-helpers');
-// const { render, response } = require('../app');
 const orderHelpers = require('../helpers/order-helpers');
 const offerHelpers = require('../helpers/offer-helpers');
-const { getAllCatOffers } = require('../helpers/offer-helpers');
 const couponHelpers = require('../helpers/coupon-helpers');
 const productofferHelpers = require('../helpers/productoffer-helpers');
 

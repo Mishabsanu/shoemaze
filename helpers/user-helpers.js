@@ -1,8 +1,6 @@
 var db = require('../config/connection')
 var collection = require('../config/collections');
 const bcrypt = require('bcrypt')
-const { MongoCompatibilityError } = require('mongodb');
-const { defaultWorkerPolicies } = require('twilio/lib/jwt/taskrouter/util');
 var objectId = require('mongodb').ObjectId
 let referralCodeGenerator = require("referral-code-generator");
 
