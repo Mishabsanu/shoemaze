@@ -1,0 +1,182 @@
+<style>
+.btn-club{
+
+  
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color:rgb(255,204,141);
+  color: black;
+  padding: 5px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 60px;
+ 
+  
+}
+
+.btn-club:hover {
+  background-color: black;
+  color: white;
+}
+#btn {
+  background-color: rgb(246, 250, 253);
+  color: black;
+  
+}
+
+#btn:hover {
+  background-color: #eb0505;
+  color: white;
+}
+
+.error {
+		color: red;
+}
+
+
+</style>
+
+<div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+  <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div class="flex flex-col overflow-y-auto md:flex-row">
+      <div class="h-32 md:h-auto md:w-1/2">
+        <img aria-hidden="true" class="object-cover w-full h-full dark:hidden"
+          src="/assets/img/categories/pp1.webp" alt="Office" />
+        <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block"
+          src="../assets/img/create-account-office-dark.jpeg" alt="Office" />
+      </div>
+      <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+        <div class="w-full">
+          <h1 style="text-align:center ;" class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+            Create account
+          </h1>
+          <form action="/signup" method="post" id="submit-form">
+		  {{#if signupErr}}
+		  <p>{{signupErr}}</p>
+		  {{/if}}
+            <label class="block text-sm">
+              <span class="text-gray-700 dark:text-gray-400">NAME</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER NAME " type="text" name="Name" required/>
+            </label>
+            <label class="block text-sm">
+              <span class="text-gray-700 dark:text-gray-400">PHONE NUMBER</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER MOBIL NUMBER " type="number" name="phone" required />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">EMAIL</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER EMAIL" type="email" name="Email"required  />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">
+                PASSWORD
+              </span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER PASSWORD" type="password" name="Password" required/>
+            </label>
+			<label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">
+				REFRAL CODE
+              </span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER REFARREL" type="text" id="referrel" name="referrel" />
+            </label>
+            <div class="text-center  " style="padding-left:100px ; padding-top: 30px;">
+              <!-- Simple link -->
+              
+              <button class="btn-club"  type="submit" class="btn btn-primary px-5  d-block mb-4">signup</button>
+            </div>
+            <div>
+              <a id="btn" href="/">Back Home</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+	$(document).ready(function () {
+		jQuery.validator.addMethod(
+			"lettersonly",
+			function (value, element) {
+				return this.optional(element) || /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/.test(value);
+			},
+			"Letters only please"
+		);
+		jQuery.validator.addMethod(
+			"properemail",
+			function (value, element) {
+				return this.optional(element) ||  /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(value);
+			},
+			"Enter proper email"
+		);
+		jQuery.validator.addMethod(
+			"minlength4",
+			function (value, element) {
+				return this.optional(element) || (value.trim().length >= 4);
+			},
+			"Minimum 4 characters without space"
+		);
+		$("#submit-form").validate({
+			rules: {
+				Name: {
+					minlength4: true,
+					lettersonly: true,
+					required: true,
+					minlength: 4,
+				},
+				Email: {
+					properemail: true,
+					required: true,
+					email: true,
+				},
+				phone: {
+					required: true,
+					number: true,
+					minlength: 10,
+					maxlength: 10,
+				},
+				Password: {
+					required: true,
+					minlength: 3,
+				}
+			},
+			messages: {
+				Name: {
+					minlength: "Please Enter Your Name",
+				},
+				Email: {
+					Email: "Please enter a valid Email id",
+				},
+				phone: {
+					minlength: "Please enter a valid contact number",
+					maxlength: "Please enter a valid contact number",
+				},
+				Password: {
+					minlength: "Please enter a minimum 3 character"
+				}
+			},
+			submitHandler: function (form) {
+				console.log("True");
+				console.log("in function submit");
+				submit();
+			},
+		});
+	});
+	
+</script>

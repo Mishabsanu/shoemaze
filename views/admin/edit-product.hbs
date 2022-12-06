@@ -1,0 +1,129 @@
+<style>
+  .btn-club {
+
+
+
+    background-color: rgb(9, 0, 0);
+    color: rgb(232, 221, 221);
+    padding: 5px 50px;
+
+
+    border-radius: 5px;
+
+
+  }
+</style>
+
+
+<main class="h-full overflow-y-auto">
+  <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+    <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+      <div class="flex flex-col overflow-y-auto md:flex-row">
+        <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+          <div class="w-full">
+            <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+              EDIT PRODUCT
+            </h1>
+            <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">NAME</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ENTER PRODUCT NAME " type="text" name="Name" required value="{{product.Name}}" />
+              </label>
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">PRICE</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="PRICE " type="number" name="price" required value="{{product.price}}" />
+              </label>
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">DISCRIPTIONS</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="DISCRIPTIONS " type="text" name="discriptions" id="discriptions" required
+                  value="{{product.discriptions}}" />
+              </label>
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">STOCK</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="STOCK" type="number" name="stock" required value="{{product.stock}}" />
+              </label>
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  GATEGORY
+                </span>
+                <select name="category" id="category">
+                  {{#each category}}
+                  <option value="{{this.category}}">{{this.category}}</option>
+                  {{/each}}
+                </select>
+                <div class="text-center px-5  " style="padding-top:50px ; padding-left:20px ;">
+                  <!-- Simple link -->
+                  <button type="submit" class="btn-club">ADD
+                    PRODUCT</button>
+                </div>
+          </div>
+        </div>
+        <div class="h-32 md:h-auto md:w-1/2">
+          <div class="" style="padding-top:40px ;">
+            <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+              UPLOAD IMAGE
+            </h1>
+            <label class="block mt-4 text-sm">
+              <img src="/assets/product-images/{{product._id}}.jpg" alt="" style="width:50px;height:auto" id="imgView1">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image1" onchange="viewImage1(event)" />
+            </label>
+            <label class="block mt-4 text-sm">
+              <img src="/assets/product-images/{{product._id}}2.jpg" alt="" style="width:50px;height:auto"
+                id="imgView2">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image2" onchange="viewImage2(event)" />
+            </label>
+            <label class="block mt-4 text-sm">
+              <img src="/assets/product-images/{{product._id}}3.jpg" alt="" style="width:50px;height:auto"
+                id="imgView3">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image3" onchange="viewImage3(event)" />
+            </label>
+            <label class="block mt-4 text-sm">
+              <img src="/assets/product-images/{{product._id}}4.jpg" alt="" style="width:50px;height:auto"
+                id="imgView4">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image4" onchange="viewImage4(event)" />
+            </label>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+</div>
+
+<script>
+
+  viewImage1 = (event) => {
+    document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[0])
+  }
+  viewImage2 = (event) => {
+    document.getElementById('imgView2').src = URL.createObjectURL(event.target.files[0])
+  }
+  viewImage3 = (event) => {
+    document.getElementById('imgView3').src = URL.createObjectURL(event.target.files[0])
+  }
+  viewImage4 = (event) => {
+    document.getElementById('imgView4').src = URL.createObjectURL(event.target.files[0])
+  }
+</script>

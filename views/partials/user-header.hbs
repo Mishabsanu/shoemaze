@@ -1,0 +1,103 @@
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+<!-- Offcanvas Menu Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="offcanvas__close">+</div>
+    <ul class="offcanvas__widget">
+        <li><span class="icon_search search-switch"></span></li>
+        <li><a href="/user/wishlist"><span class="icon_heart_alt"></span>
+                <div class="tip">2</div>
+            </a></li>
+        <li><a href="/add-to-cart/{{thid._id}}"><span class="icon_bag_alt"></span>
+                <div class="tip">2</div>
+            </a></li>
+    </ul>
+    <div class="offcanvas__logo">
+        {{!-- <a href="#"><img src="/assets/img/logo.png" alt=""></a> --}}
+        <h3>SHOE CLUB</h3>
+    </div>
+    <div id="mobile-menu-wrap"></div>
+    <div class="offcanvas__auth">
+        <a href="/login">Login</a>
+        <a href="/signup">Register</a>
+    </div>
+</div>
+<!-- Offcanvas Menu End -->
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2">
+                <div class="header__logo">
+                    {{!-- <a href="#"><img src="/assets/img/logo.png" alt=""></a> --}}
+                    <h3><b>SHOE'S CLUB</b> </h3>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <nav class="header__menu">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        {{#each category}}
+                        <li class="active"><a href="/show-category/{{this._id}}">{{this.category}}</a></li>
+                        {{/each}}
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__right">
+                    <div class="header__right__auth" id="logout">
+                        {{#if users}}
+                        <a href="/logout"  onclick="return confirm('Are you want logout ?')">Logout</a>
+                        {{else}}
+                        <a href="/login">Login</a>
+                        {{/if}}
+                        {{#if person}}
+                        <a href="/profile">{{person.Name}}</a>
+                        {{else}}
+                        <a href="/signup">Register</a>
+                        {{/if}}
+                    </div>
+                    <ul class="header__right__widget">
+                        <li><span class="icon_search search-switch"></span></li>
+                        <li><a href="#"><span class="icon_heart_alt"></span>
+                                <div class="tip">2</div>
+                            </a></li>
+                        <li><a href="/view-cart/{{this._id}}"><span class="icon_bag_alt"></span>
+                                <div class="tip" id="cart-Count">{{cartCount}}</div>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="canvas__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/assets/js/main.js"></script>
+

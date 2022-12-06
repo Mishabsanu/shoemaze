@@ -1,0 +1,399 @@
+<!-- chek out -->
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Css Styles -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+
+
+<section class="checkout spad">
+    <div class="container-fluid ">
+        <div class="col-lg-12">
+            <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
+                here to enter your code.</h6>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <b>BILLING DETAILS</b>
+                {{#each alladdress}}
+                <div class="custom-control custom-checkbox me-sm-2 border" style="margin: 20px;">
+                    <input type="radio" class="custom-control-input"
+                        onclick="selectAddress('{{this.homeaddress}}','{{this.fullAddress}}','{{this.town}}','{{this.country}}','{{this.pincode}}','{{this.phone}}')"
+                        value="{{this._id}}" name="address" id="{{@index}}" required>
+                    <label class="custom-control-label"
+                        for="{{@index}}">{{this.homeaddress}}<br>{{this.fullAddress}},{{this.town}},<br>{{this.country}},{{this.pincode}},{{this.phone}}</label>
+                    <a href="/deleteAdress2/{{this.id}}" class="text-danger"><i style="padding-left:200px ;"
+                            class="fa-solid fa-trash"
+                            onclick="return confirm('Are you want to delete this product {{this.Name}} ?')"></i></a>
+                </div>
+                {{/each}}
+                <div style="text-align: center;">
+                    <a href="/address"> <button type="submit" class="site-btn" style="height: 43px; pad">ADD
+                            ADDRESS</button></a>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="discount__content">
+                    <h6>Discount codes</h6>
+                    <form action="">
+                        <div class="" style="border: solid 1px;border-radius: 69px;">
+                            <input type="text" id="coupon" name="coupon" placeholder="Enter coupon code">
+                            <button type="button" class="site-btn" onclick="couponApply()"
+                                style="height: 45px;padding-left: 33px;">Apply</button>
+                        </div>
+                    </form>
+                </div>
+                <form action="/place-order" method="post" class="checkout__form m-" id="checkout-form">
+                    <input type="text" id="ID" name="id" value="" hidden>
+                    <div class="checkout__form__input">
+                        {{!-- <p>House Name <span>*</span></p> --}}
+
+                        <input type="text" placeholder="Enter House Name " id="housename" name="homeaddress" required
+                            hidden>
+                    </div>
+
+                    <div class="checkout__form__input">
+                        {{!-- <p>Address <span>*</span></p> --}}
+                        <input type="text" placeholder="Enter Street Address " id="address" name="fullAddress" required
+                            hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>Town/City <span>*</span></p> --}}
+                        <input type="text" placeholder=" Enter Town/City " id="town" name="town" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>Country/State <span>*</span></p> --}}
+                        <input type="text" placeholder=" Enter Country/State " id="country" name="country" required
+                            hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>PIN CODE <span>*</span></p> --}}
+                        <input type="number" placeholder=" Enter PIN CODE " id="pincode" name="pincode" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>Mobil Number <span>*</span></p> --}}
+                        <input type="number" placeholder=" Enter Mobil Number " id="phone" name="phone" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        <input type="text" name="userId" value="{{user._id}}" hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        <input type="text" id="couponId" name="couponId" hidden>
+                        <input type="text" id="couponOffer" name="couponOffer" hidden>
+                        <input type="text" id="couponName" name="couponName" hidden>
+                    </div>
+
+                    <div class="checkout__order" style="margin-top:50px ;">
+                        <h5>Your order</h5>
+                        <div class="checkout__order__product">
+                            <ul>
+                                <li>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="top__text ">Product</span>
+                                        <span class="top__text">Quantity</span>
+                                        <span class="top__text">Price</span>
+                                    </div>
+                                </li>
+                                {{#each cartsProducts}}
+                                <li>
+                                    <div class="d-flex justify-content-between">
+                                        <span>{{this.product.Name}} </span>
+                                        <span>{{this.quantity}} </span>
+                                        {{#if product.categoryOffer}}
+                                        <span>₹{{product.categoryOffer}}</span>
+                                        {{else}}
+                                        <span>₹{{this.product.price}}</span>
+                                        {{/if}}
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="checkout__order__total">
+                            <ul>
+                                <li>Sub Total <span id="subtotal">₹{{total}}</span></li>
+                                <li>Discount <span id="discount">₹0</span></li>
+                                {{#if product.categoryOffer}}
+                                <span>₹{{product.categoryOffer}}</span>
+                                {{else}}
+                                <li>Total <span id="total">₹{{total}}</span></li>
+                                {{/if}}
+                            </ul>
+                        </div>
+                        <input type="text" name="total" class="d-none" value="{{total}}" id="">
+                        <div class="checkout__order__widget">
+                            <div style="display: flex;">
+                                <input type="radio" name="payment-method" value="COD" onclick="toggle()" required>
+                                CASH ON
+                                DELIVERY <label for="html"></label> <img
+                                    style="width:30px ;height:30px ; margin-left: 17vw; ;"
+                                    src="https://cdn-icons-png.flaticon.com/512/4766/4766928.png" alt="">
+                            </div><br><br>
+                            <div style="display: flex;">
+                                <input type="radio" name="payment-method" value="razorpay" onclick="toggle()"
+                                    required>Razorpay
+                                <label for="html"></label> <img style="width:30px ;height:30px ; margin-left: 11vw; "
+                                    src="/assets/img/payment/payment-4.png" alt=""><img
+                                    style="width:30px ;height:30px ; margin-left: 4vw; "
+                                    src="/assets/img/payment/payment-2.png" alt=""><img
+                                    style="width:30px ;height:30px ; margin-left: 4vw; "
+                                    src="/assets/img/payment/payment-3.png" alt="">
+                            </div><br><br>
+                            <div style="display: flex;">
+                                <input type="radio" name="payment-method" value="paypal" onclick="toggle1()" required>
+                                paypal
+                                <label for="css"></label><img style="width:30px ;height:30px ; margin-left: 2vw; "
+                                    src="/assets/img/payment/payment-1.png" alt=""><img
+                                    style="width:30px ;height:30px ; margin-left: 3vw; "
+                                    src="/assets/img/payment/payment-5.png" alt="">
+                                <img style="width:30px ;height:30px ; margin-left: 3vw; "
+                                    src="/assets/img/payment/payment-4.png" alt=""><img
+                                    style="width:30px ;height:30px ; margin-left: 4vw; "
+                                    src="/assets/img/payment/payment-2.png" alt=""><img
+                                    style="width:30px ;height:30px ; margin-left: 4vw; "
+                                    src="/assets/img/payment/payment-3.png" alt="">
+                            </div><br><br>
+                            {{#if wallet}}
+                            <div style="display: flex;">
+                                <input type="radio" name="payment-method" value="wallet" required> wallet
+                                <label for="css"></label>
+                            </div>
+                            {{/if}}
+                        </div>
+                        <button type="submit" class="site-btn">Place oder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    let uniqueId = new Date()
+    document.getElementById('ID').value = uniqueId
+</script>
+
+
+
+
+
+
+
+<!-- Checkout Section End -->
+<script>
+
+    function selectAddress(houseaddress, address, town, country, pincode, phone) {
+        document.getElementById('housename').value = houseaddress
+        document.getElementById('address').value = address
+        document.getElementById('town').value = town
+        document.getElementById('country').value = country
+        document.getElementById('pincode').value = pincode
+        document.getElementById('phone').value = phone
+
+    }
+
+</script>
+
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<!-- check out close -->
+
+<script>
+    function couponApply() {
+        console.log("entered")
+        let couponCode = document.getElementById('coupon').value
+        $.ajax({
+            url: '/coupon-apply',
+            data: {
+                coupon: couponCode,
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.couponSuccess) {
+                    document.getElementById('couponId').value = response.resCoupon.couponId
+                    document.getElementById('couponOffer').value = response.resCoupon.offer
+                    document.getElementById('couponName').value = response.resCoupon.coupon
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Coupon Applied Successfully",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                    document.getElementById('total').innerHTML = response.total
+                    //document.getElementById('subtotal').innerHTML = response.total
+                    document.getElementById('discount').innerHTML = response.discountValue
+
+                    document.getElementById('CouponName').value = response.coupon
+
+                } else if (response.couponUsed) {
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "You are Already Used This Coupon",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+
+                } else if (response.couponExpired) {
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Entered Coupon Expired",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Invalid Coupon",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                }
+            }
+        })
+    }
+</script>
+<script>
+    $("#checkout-form").submit((e) => {
+        e.preventDefault()  //
+        $.ajax({
+            url: "/place-order",
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+         
+                //alert("order placed")
+                 
+                if (response.codStatus) {
+                    //location.href = '/payment-success'
+                    Swal.fire({
+                    icon: "success",
+                    title: "ORDER PLACED SUCCESS",
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then(()=>{
+                    location.href = '/payment-success'
+                })
+                } else if (response.paypal) {
+
+                    location.href = response.link
+
+                } else if (response.result) {
+                    Swal.fire({
+                    icon: "success",
+                    title: "ORDER PLACED SUCCESS",
+                    showConfirmButton: false,
+                    timer: 1000,
+                }).then(()=>{
+                    location.href = '/payment-success'
+                })
+                    //location.href = '/payment-success'
+                } else {
+                    razorpayPayment(response)
+                }
+            }
+        })
+    })
+
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_cFoDpMewovyGgt", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Shoe Club",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            method: 'post',
+            data: {
+                payment,
+                order
+            },
+            success: (response) => {
+                console.log(response, 'iii')
+                if (response.status) {
+                    //location.href = '/payment-success'
+                    Swal.fire({
+                    icon: "success",
+                    title: "ORDER PLACED SUCCESS",
+                    showConfirmButton: false,
+                    timer: 1000,
+                }).then(()=>{
+                    location.href = '/payment-success'
+                })
+                } else {
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+
+    function toggle() {
+        const list = document.getElementById("placeorder").classList;
+        const list2 = document.getElementById("paypal-button-container").classList;
+        list.add("sft");
+        list2.remove("sft");
+
+    }
+    function toggle1() {
+        const list = document.getElementById("placeorder").classList;
+        const list2 = document.getElementById("paypal-button-container").classList;
+        list2.add("sft");
+        list.remove("sft");
+    }
+</script>

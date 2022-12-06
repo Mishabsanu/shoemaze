@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    .btn-club {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: rgb(255, 204, 141);
+        color: black;
+        padding: 5px 30px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .btn-club:hover {
+        background-color: black;
+        color: white;
+    }
+
+    #btn {
+        background-color: rgb(246, 250, 253);
+        color: black;
+
+    }
+
+    #btn:hover {
+        background-color: #eb0505;
+        color: white;
+    }
+</style>
+
+<div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900 ">
+    <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+        <div class="flex flex-col overflow-y-auto md:flex-row">
+            <div class="col-lg-5">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                            alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{userss.Name}}</h5>
+                        <p class="text-muted mb-1">Full Stack Developer</p>
+                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a href=""> <button type="button" class="btn btn-primary">Change Profile</button></a>
+                        </div><br>
+                        <div>
+                            <a href="/edit-address"><button type="button" class="btn btn-primary">Change
+                                    Password</button></a>
+                        </div><br>
+                        <div>
+                            <a href=""> <button type="button" class="btn btn-primary">My order</button></a>
+                        </div><br>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                </div>
+            </div>
+            <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+                <div class="w-full">
+                    <h1 style="padding-top: 50px;text-align: center;"
+                        class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+                        PERSONAL INFORMATION
+                    </h1>
+                    <form action="/" method="post">
+                        <label class="block text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">HOUSE NAME</span>
+                            <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="ENTER HOUSE NAME" type="text" name="Name" />
+                        </label>
+                        <label class="block text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">PLACE NAME</span>
+                            <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="ENTER PLACE NAME " type="email" name="Email" />
+                        </label>
+                        <label class="block text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">POST OFFICE</span>
+                            <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="ENTER POST OFFICE" type="phone" name="phone" />
+                        </label>
+                        <label class="block text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">PIN CODE</span>
+                            <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="ENTER PIN CODE"
+                                type="                                                                                                                                                                                                                                                                                                                                                                                                                    "
+                                name="address" />
+                        </label>
+                        <hr class="my-8">
+                        <div class="col px-5" style="padding-top: 30px;text-align: center;">
+                            <!-- Simple link -->
+
+                            <button class="btn-club" type="submit"
+                                class="btn btn-primary  d-block mb-4  text-center px-5 ">EDIT PROFILE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

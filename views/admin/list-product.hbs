@@ -1,0 +1,142 @@
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container px-6 mx-auto grid">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            PRODUCT LIST
+            <a href="/admin/add-product">
+                <button
+                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Add PRODUCT
+                </button>
+            </a>
+            <a href="/admin/add-productoffer">
+                <button
+                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Add PRODUCT OFFER
+                </button>
+            </a>
+        </h2>
+        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full whitespace-no-wrap">
+                        <thead>
+                            <tr
+                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                <th class="px-4 py-3">NO</th>
+                                <th class="px-4 py-3">NAME</th>
+                                <th class="px-4 py-3">IMAGE</th>
+                                <th class="px-4 py-3">PRICE</th>
+                                <th class="px-4 py-3">DISCRIPTIONS</th>
+                                <th class="px-4 py-3">STOCK</th>
+                                <th class="px-4 py-3">CATEGORY</th>
+                                <th class="px-4 py-3">EDIT</th>
+                                <th class="px-4 py-3">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                            <script>let sno = 0</script>
+                            {{#each products}}
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3 text-sm">
+                            
+                                    <script>document.write(++sno)</script>
+                                </td>
+                            
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                        <div>
+                                            <p class="font-semibold"> {{this.Name}}</p>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <img src="/assets/product-images/{{this._id}}.jpg" width="40" alt="not pictetr">
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    ₹{{this.price}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{this.discriptions}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{this.stock}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{this.category}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <span class="">
+                                        <a class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-700"
+                                            href="/admin/edit-product/{{this._id}}" role="button">EDIT</a>
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    <span class="">
+                                        <a class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                                            href="/admin/delete-product/{{this._id}}" role="button"
+                                            onclick="return confirm('Are you want to delete this product {{this.Name}} ?')">DELETE</a>
+                                    </span>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    {{#if products.length}}
+                    <button onclick="paginatePrevious()" style="background-color:red ;">
+                        < </button>
+                            <span>Page <span id="pageInfo">{{passNo}}</span></span>
+
+                            <button onclick="paginateNext()" style="background-color:red ;">></button>
+                            {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function paginatePrevious() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) - 1
+            if (page) {
+                window.location.href = `/admin/list-product/${page}`
+            } else {
+                return false
+            }
+        }
+        function paginateNext() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) + 1
+            if (page) {
+                window.location.href = `/admin/list-product/${page}`
+            } else {
+                return false
+            }
+        }
+
+    </script>
+
+    <script>
+        archiveFunction() {
+            swal({
+                title: "Are you sure?",
+                text: "But you will still be able to retrieve this file.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, archive it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        swal("Deleted!", "Your imaginary file has been archived.", "success");
+                    } else {
+                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    }
+                });
+        }
+    </script>

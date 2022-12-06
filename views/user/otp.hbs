@@ -1,0 +1,125 @@
+<style>
+  .btn-club {
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(255, 204, 141);
+    color: black;
+    padding: 5px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+
+  }
+
+  .btn-club:hover {
+    background-color: black;
+    color: white;
+  }
+</style>
+
+<div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+  <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div class="flex flex-col overflow-y-auto md:flex-row">
+      <div class="h-32 md:h-auto md:w-1/2">
+        <img aria-hidden="true" class="object-cover w-full h-full dark:hidden" src="/assets/img/categories/png10.jpg"
+          alt="Office" />
+        <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block" src="" alt="Office" />
+      </div>
+      <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+        <div class="w-full">
+          <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+            OTP VARIFICATIONS
+          </h1>
+          <form action="/submit-otp" method="post">
+            {{#if otpErr}}
+            <p style="color:red ;text-align: center;">Otp invalid </p>
+            {{/if}}
+            <p></p>
+            <label class="block text-sm">
+              <span class="text-gray-700 dark:text-gray-400">OTP NUMBER</span>
+              <input
+                class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER OTP NUMBER " type="number" name="otp" />
+              <input type="text" value="{{phone}}" hidden>
+              <div>Time left = <span id="timer"></span></div>
+              <div class="mt-1" id="hide-send" style="visibility: hidden;">
+
+                <button id="regenerateOTP" class="btn btn-warning btn_shadow mt-1" onclick="resendotp('{{this.phone}}')"
+                  style="border-radius: 0;">Resend OTP </button>
+              </div>
+        </div>
+        <div class="text-center px-5  " style="padding-top:100px ;">
+          <button class="btn-club" type="submit" class="btn btn-primary px-5  d-block mb-4">SUBMIT</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<script>
+
+  function resendotp(phone) {
+
+
+    $.ajax({
+      url: "/get-otp",
+
+      data: { phone: phone },
+      method: 'post',
+      success: function (data) {
+        swal({ title: "Sweet!", text: "One time password Message is sent again", timer: 2000 });
+      },
+      error: function () {
+        swal({ title: "Error!", text: "We are facing technical error!", type: "error", timer: 2000, confirmButtonText: "Ok" });
+        return false;
+      }
+    });
+
+  }
+</script>
+
+<script>
+  function showdiv() {
+    document.getElementById('hide-send').style.visibility = "visible";
+
+  }
+</script>
+
+<script>
+  let timerOn = true;
+
+  function timer(remaining) {
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+
+    m = m < 10 ? '0' + m : m;
+    s = s < 10 ? '0' + s : s;
+    document.getElementById('timer').innerHTML = m + ':' + s;
+    remaining -= 1;
+
+    if (remaining >= 0 && timerOn) {
+      setTimeout(function () {
+        timer(remaining);
+      }, 1000);
+      return;
+    }
+
+    if (!timerOn) {
+      // Do validate stuff here
+      return;
+    }
+
+    // Do timeout stuff here
+
+    showdiv()
+  }
+
+  timer(30);
+</script>

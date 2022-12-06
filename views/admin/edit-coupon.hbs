@@ -1,0 +1,51 @@
+<style>
+    .btn-club {
+        background-color: rgb(9, 0, 0);
+        color: rgb(232, 221, 221);
+        padding: 10px 50px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
+
+<main class="h-full overflow-y-auto">
+    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+        <div class="flex-1 h-full max-w-xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+            <div class="flex flex overflow-y-auto ">
+                {{#each coupon}}
+                <div class="flex items-center justify-center p-6  sm:p-12  ">
+                    <div class="">
+                        <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
+                            style="padding-left:150px ;">
+                            EDIT COUPON
+                        </h1>
+                        {{#if categoryErr}}
+                        <p style="color:red ;">category already exists</p>
+                        {{/if}}
+                        <form action="/admin/edit-coupon/{{coupon._id}}" method="post">
+                            <label class="block text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">ENTER CATEGORY NAME</span>
+                                <input
+                                    class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    type="text" name="coupon" required value="{{this.coupon}}" />
+                            </label>
+                            <label class="block text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">ENTER DISCOUNT</span>
+                                <input
+                                    class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    type="text" name="couponAmount" required value="{{this.couponAmount}} " />
+                            </label>
+                            <div class="text-center px-5  " style="padding-top: 20px; padding-left:70px ;">
+                                <button type="submit" class="btn-club">EDIT COUPON</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+</div>

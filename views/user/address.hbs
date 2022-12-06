@@ -1,0 +1,173 @@
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Css Styles -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/address" method="post" class="checkout__form" id="submit-address">
+                    <b>BILLING DETAILS</b>
+                    <input type="text" id="ID" name="id" value="" hidden>
+                    <div class="checkout__form__input">
+                        <p>House Name <span>*</span></p>
+                        <input type="text" placeholder="Enter House Name " id="housename" name="homeaddress" required>
+                    </div>
+                    <div class="checkout__form__input">
+                        <p>Address <span>*</span></p>
+                        <input type="text" placeholder="Enter Street Address " id="address" name="fullAddress" required>
+                    </div>
+                    <div class="checkout__form__input">
+                        <p>Town/City <span>*</span></p>
+                        <input type="text" placeholder=" Enter Town/City " id="town" name="town" required>
+                    </div>
+                    <div class="checkout__form__input">
+                        <p>Country/State <span>*</span></p>
+                        <input type="text" placeholder=" Enter Country/State " id="country" name="country" required>
+                    </div>
+                    <div class="checkout__form__input">
+                        <p>PIN CODE <span>*</span></p>
+                        <input type="number" placeholder=" Enter PIN CODE " id="pincode" name="pincode" required>
+                    </div>
+                    <div class="checkout__form__input">
+                        <p>Mobil Number <span>*</span></p>
+                        <input type="number" placeholder=" Enter Mobil Number " id="phone" name="phone" required>
+                    </div>
+                    <div class="checkout__form__input">
+                        <input type="text" name="userId" value="{{user._id}}" hidden>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="site-btn" style="height: 43px; pad">ADD ADDRESS</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6" style="margin-top:100px ;">
+                <img style="height:500px ; width: 100%;"
+                    src="https://cdn.dribbble.com/users/1595839/screenshots/12327466/location.gif" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    let uniqueId = new Date()
+    document.getElementById('ID').value = uniqueId
+</script>
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+    $(document).ready(function () {
+        jQuery.validator.addMethod(
+            "lettersonly",
+            function (value, element) {
+                return this.optional(element) || /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/.test(value);
+            },
+            "Letters only please"
+        );
+        jQuery.validator.addMethod(
+            "lettersonly",
+            function (value, element) {
+                return this.optional(element) || /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/.test(value);
+            },
+            "Letters only please"
+        );
+        jQuery.validator.addMethod(
+            "minlength4",
+            function (value, element) {
+                return this.optional(element) || (value.trim().length >= 4);
+            },
+            "Minimum 4 characters without space"
+        );
+        $("#submit-address").validate({
+            rules: {
+                homeaddress: {
+                    minlength4: true,
+                    lettersonly: true,
+                    required: true,
+                    minlength: 4,
+                },
+                fullAddress: {
+                    minlength4: true,
+                    lettersonly: true,
+                    required: true,
+                    minlength: 4,
+                },
+                  town: {
+                    minlength4: true,
+                    lettersonly: true,
+                    required: true,
+                    minlength: 4,
+                },
+                country: {
+                    minlength4: true,
+                    lettersonly: true,
+                    required: true,
+                    minlength: 4,
+                },
+
+                phone: {
+                    required: true,
+                    number: true,
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                pincode: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 6,
+                }
+            },
+            messages: {
+                homeaddress: {
+                    minlength: "Please Enter Your home address",
+                },
+                fullAddress: {
+                    fullAddress: "Please enter a full address",
+                },
+                phone: {
+                    minlength: "Please enter a valid contact number",
+                    maxlength: "Please enter a valid contact number",
+                },
+                pincode: {
+                    minlength: "Please enter a minimum 6 character"
+                }
+            },
+            submitHandler: function (form) {
+                console.log("True");
+                console.log("in function submit");
+                submit();
+            },
+        });
+    });
+
+</script>

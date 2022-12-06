@@ -1,0 +1,208 @@
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+
+{{!-- https://iide.co/wp-content/uploads/2021/09/image6-11.png --}}
+
+<section class="banner set-bg" data-setbg="https://iide.co/wp-content/uploads/2021/09/image6-11.png)"
+    style="background-image: url(https://iide.co/wp-content/uploads/2021/09/image6-11.png);">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-8 m-auto">
+                <div class="banner__slider owl-carousel">
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Shoe Collection</span>
+                            <h1>Welcom Shoe Club </h1>
+                            <a href="/all-product">Shop now</a>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Shoe Collection</span>
+                            <h1>High Quality Shoes</h1>
+                            <a href="/all-product">Shop now</a>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Shoe Collection</span>
+                            <h1>Color Full Collection</h1>
+                            <a href="/all-product">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>New product</h4>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <ul class="filter__controls">
+                    <li class="active" data-filter="*">All</li>
+                    {{#each category}}
+                    <li data-filter=".{{this.category}}">{{this.category}}’s</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="row property__gallery">
+            {{#each products}}
+            <div class="col-lg-3 col-md-4 col-sm-6 mix {{this.category}} ">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg=""><img
+                            src="/assets/product-images/{{this._id}}.jpg" alt="not show">
+                        {{#if catOfferPercentage}}
+                        <div class="label new">{{this.catOfferPercentage}}% off</div>
+                        {{/if}}
+                        {{#if productOfferPercentage}}
+                        <p class="label new">{{productOfferPercentage}}<small>%off</small></p>
+                        {{/if}}
+                        <ul class="product__hover">
+                            <li><a href="/assets/product-images/{{this._id}}.jpg" class="image-popup"><span
+                                        class="arrow_expand"></span></a></li>
+                            <li><a href="/user/wishlist"><span class="icon_heart_alt"></span></a></li>
+                            <li><a><button onclick="addToCart('{{this._id}}')"><span
+                                            class="icon_bag_alt"></span></button></a></li>
+                        </ul>
+                        </a>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="/product-view/{{this._id}}">{{this.Name}}</a></h6>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="product__price">{{#if actualPrice}}₹ {{this.price}}<span> <del>₹
+                                    {{this.actualPrice}}</del></span>{{else}}₹ {{this.price}}{{/if}}</div>
+                        {{#if fewStock}}
+                        <p class="text-danger">Only Few Available!</p>
+                        {{/if}}
+                        {{#if noStock}}
+                        <p class="text-danger">Out Of Stock!</p>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+<!-- Product Section End -->
+
+<!-- Banner Section Begin -->
+
+<section class="banner set-bg"
+    data-setbg="https://images.puma.com/image/upload/q_auto,f_auto,w_1440/regional/~regional~IND~others~KOP~Oct+2022~Cricket~Cricket-homepage-desktop.jpg/fmt/jpg/fmt/png)"
+    style="background-image:url(https://images.puma.com/image/upload/q_auto,f_auto,w_1440/regional/~regional~IND~others~KOP~November+2022~Black+Friday+Main+Event~Black_Friday_New_Season_Desktop.jpg/fmt/jpg/fmt/png) ;">
+    <div class="container">
+        <div class="categories__texta" style="  text-align: center;">
+            <h1>PRODUCT - OFFER 20% OFF </h1>
+            <p>Sitamet, consectetur adipiscing elit,<br> sed do eiusmod tempor incidid-unt labore
+            </p>
+            <a href="/all-product">Shop now</a>
+        </div>
+    </div>
+</section><br>
+<section class="banner set-bg"
+    data-setbg="https://images.puma.com/image/upload/q_auto,f_auto,w_1440/regional/~regional~IND~others~KOP~Oct+2022~Cricket~Cricket-homepage-desktop.jpg/fmt/jpg/fmt/png)"
+    style="background-image:url(https://images.puma.com/image/upload/q_auto,f_auto,w_1440/regional/~regional~IND~others~KOP~November+2022~Black+Friday+Main+Event~4th+%282%29.jpg/fmt/jpg/fmt/png) ;">
+    <div class="container">
+        <div class="categories__texta" style=" color: white; text-align: center;">
+            <h1 style=" color: white;">CATEGORY - OFFER{{product.catOfferPercentage}} 50% OFF</h1>
+            <p style=" color: white;"> Sitamet, consectetur adipiscing elit,<br> sed do eiusmod tempor incidid-unt
+                labore
+            </p>
+            <a style=" color: white;" href="/all-product">Shop now</a>
+        </div>
+    </div>
+</section>
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<script src="/javascripts/script.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function addToCart(proId) {
+        $.ajax({
+            url: "/add-to-cart/" + proId,
+            method: "get",
+            success: (response) => {
+                if (response.status == "add") {
+                    let count = $("#cart-count").html();
+                    count = parseInt(count) + 1;
+                    $("#cart-count").html(count);
+                    Swal.fire({
+                        icon: "success",
+                        title: "Item added to Cart",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    }).then(() => {
+                        location.reload()
+
+                    })
+                } else if (response.status == "noStock") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops..!",
+                        text: "Out Of Stock!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else if (response.status == "fewStock") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops..!",
+                        text: "Out Of Stock!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else if (response.status == "maxLimitStock") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Oops..!",
+                        text: "Limit Is Reached!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else {
+                    location.href = "/login";
+                }
+            },
+        });
+    }
+</script>

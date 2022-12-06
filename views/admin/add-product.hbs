@@ -1,0 +1,215 @@
+<style>
+  .btn-club {
+
+
+
+    background-color: rgb(9, 0, 0);
+    color: rgb(232, 221, 221);
+    padding: 5px 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+  integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<main class="h-full overflow-y-auto">
+  <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+    <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+      <div class="flex flex-col overflow-y-auto md:flex-row">
+
+        <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+          <div class="w-full">
+            <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+              ADDPRODUCT
+            </h1>
+            <form action="/admin/add-product" method="post" enctype="multipart/form-data">
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">NAME</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ENTER PRODUCT NAME " type="text" name="Name" required />
+              </label>
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">PRICE</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="PRICE " type="number" name="price" required />
+              </label>
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">DISCRIPTIONS</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="DISCRIPTIONS " type="text" name="discriptions" required />
+              </label>
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">STOCK</span>
+                <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="STOCK" type="number" name="stock" required />
+              </label>
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  CATEGORY
+                </span>
+                <select name="category" id="category">
+                  {{#each category}}
+                  <option value="{{this.category}}">{{this.category}}</option>
+                  {{/each}}
+
+                </select>
+                {{!-- <input
+                  class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="QUANTITY" type="number" name="quantity" required />
+              </label> --}}
+
+
+              <div class="text-center px-5  " style="padding-top:50px ; padding-left:20px ;">
+                <!-- Simple link -->
+
+                <button type="submit" class="btn-club">ADD
+                  PRODUCT</button>
+              </div>
+
+
+
+          </div>
+
+
+        </div>
+
+        <div class="h-32 md:h-auto md:w-1/2">
+
+          <div class="" style="padding-top:40px ;">
+            <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+              UPLOAD IMAGE
+            </h1>
+            {{!-- <input class="form-control" style="padding-top:30px ;" type="file">
+            <input class="form-control" style="padding-top:30px ;" type="file">
+            <input class="form-control" style="padding-top:30px ;" type="file">
+            <input class="form-control" style="padding-top:30px ;" type="file">
+
+            --}}
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <img src="/assets/product-images/{{this._id}}.jpg" alt="" style="width:100px;height:auto" id="view">
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image1" id="id_image1" required />
+            </label>
+
+      
+
+
+            <div id="crop">
+              <div class="vald-info" id="info"></div>
+              <h5 class="error_form text-danger" id="image1_error_message"></h5>
+              <div style="display: flex">
+                <div id="image-box1" class="image-container clr">
+                </div>
+                <button type="button" class="btn btneds bg-success" id="crop-btn1"
+                  style=" color: rgb(255, 255, 255); background-color: rgb(12, 12, 0);border-radius: 10px; margin-top: 10px; display: none; width: 50%; margin: 20rem 0rem 0rem 0rem;">crop</button>
+              </div>
+            </div>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image2" required />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image3" required />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">IMAGE</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="image1" type="file" name="image4" required />
+            </label>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+</div>
+
+<script>
+  function viewimage(event) {
+    document.getElementById('view').src = URL.createObjectURL(event.target.files[0])
+  }
+
+  /////////////for image1///////////////////
+
+  const imagebox1 = document.getElementById("image-box1");
+  const crop_btn1 = document.getElementById("crop-btn1");
+  const input1 = document.getElementById("id_image1");
+
+  // When user uploads the image this event will get triggered
+  input1.addEventListener("change", () => {
+    // Getting image file object from the input variable
+    const img_data1 = input1.files[0];
+    // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+    // The new object URL represents the specified File object or Blob object.
+    const url1 = URL.createObjectURL(img_data1);
+    // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+    imagebox1.innerHTML = `<img src="${url1}" id="image1" style="width:100%;">`;
+    // Storing that cropping view image in a variable
+    const image1 = document.getElementById("image1");
+    // Displaying the image box
+    document.getElementById("image-box1").style.display = "block";
+    // Displaying the Crop buttton
+    document.getElementById("crop-btn1").style.display = "block";
+    // Hiding the Post button
+    document.getElementById("view").style.display = "block";
+    const cropper1 = new Cropper(image1, {
+      autoCropArea: 1,
+      viewMode: 1,
+      scalable: false,
+      zoomable: false,
+      movable: false,
+      minCropBoxWidth: 50,
+      minCropBoxHeight: 50,
+    });
+    // When crop button is clicked this event will get triggered
+    crop_btn1.addEventListener("click", () => {
+      // This method coverts the selected cropped image on the cropper canvas into a blob object
+      cropper1.getCroppedCanvas().toBlob((blob) => {
+        // Gets the original image data
+        let fileInputElement1 = document.getElementById("id_image1");
+        // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+        let file1 = new File([blob], img_data1.name, {
+          type: "image/*",
+          lastModified: new Date().getTime(),
+        });
+        // Create a new container
+        let container1 = new DataTransfer();
+        // Add the cropped image file to the container
+        container1.items.add(file1);
+        // Replace the original image file with the new cropped image file
+        fileInputElement1.files = container1.files;
+        document.getElementById("view").src = URL.createObjectURL(
+          fileInputElement1.files[0]
+        );
+        // Hide the cropper box
+        document.getElementById("image-box1").style.display = "none";
+        // Hide the crop button
+        document.getElementById("crop-btn1").style.display = "none";
+
+      });
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js"
+  integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>

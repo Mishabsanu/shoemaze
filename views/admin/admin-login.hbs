@@ -1,0 +1,65 @@
+<style>
+  .btn-club {
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(240, 12, 12);
+    color: black;
+    padding: 5px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+      {
+        {
+        !-- margin: 60px;
+        --
+      }
+    }
+  }
+  .btn-club:hover {
+    background-color: black;
+    color: white;
+  }
+</style>
+
+<div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+  <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div class="flex flex-col overflow-y-auto md:flex-row">
+      <div class="h-32 md:h-auto md:w-1/2">
+        <img aria-hidden="true" class="object-cover w-full h-full dark:hidden" src="/assets/img/categories/png1.jpg"
+          alt="Office" />
+        <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block"
+          src="../assets/img/create-account-office-dark.jpeg" alt="Office" />
+      </div>
+      <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+        <div class="w-full">
+          <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200" style="text-align:center ;">
+            ADMIN LOGIN
+          </h1>
+          <form action="/admin/adminlogin" method="post">
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">EMAIL</span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER EMAIL" type="email" name="Email" required />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">
+                PASSWORD
+              </span>
+              <input
+                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="ENTER PASSWORD" type="password" name="Password" required />
+            </label>
+         {{#if adminErr}}
+            <p class="error text-danger" style="padding-top: 50px;text-align: center; color: red;">Invalid user and password</p>
+          {{/if}}
+            <div class="text-center px-5  " style="padding-top:50px ; padding-left:100px ;">
+
+              <button type="submit" class="btn-club">signup</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

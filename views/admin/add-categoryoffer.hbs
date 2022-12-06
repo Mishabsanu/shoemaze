@@ -1,0 +1,167 @@
+<style>
+    .btn-club {
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: rgb(9, 0, 0);
+        color: rgb(232, 221, 221);
+        padding: 5px 30px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container px-6 mx-auto grid">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            LIST CATEGORY OFFER
+        </h2>
+        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full whitespace-no-wrap">
+                        <thead>
+                            <tr
+                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                <th class="px-4 py-3">CATEGORY</th>
+                                <th class="px-4 py-3">STARTING DATE</th>
+                                <th class="px-4 py-3">EXPIRE DATE</th>
+                                <th class="px-4 py-3">OFFER(%)</th>
+                                <th class="px-4 py-3">EDIT</th>
+                                <th class="px-4 py-3">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                            {{#each alloffercategory}}
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                        <div>
+                                            <p class="font-semibold"> {{this.category}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{this.starting}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{this.expiry}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{this.catOfferPercentage}}%
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <span class="">
+                                        <a class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-700"
+                                            href="/admin/edit-categoryOffer/{{this._id}}" role="button">EDIT</a>
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    <span class="">
+                                        <a class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                                            href="/admin/delete-categoryOffer/{{this._id}}" role="button"
+                                            onclick="return confirm('Are you sure  {{this.category}} ?')">DELETE</a>
+                                    </span>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="h-full overflow-y-auto">
+        <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+            <div class="flex-1 h-full max-w-xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                <div class="flex flex overflow-y-auto ">
+                    <div class="flex items-center justify-center p-6  sm:p-12  ">
+                        <div class="">
+                            <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
+                                style="padding-left:150px ;">
+                                ADD CATEGORY OFFER
+                            </h1>
+                            <form action="/admin/add-categoryoffer" method="post">
+                                <label for="category">Category</label>
+                                <select name="category" class="form-control">
+                                    {{#each category}}
+                                    <option>{{this.category}}</option>
+                                    {{/each}}
+                                </select><br><br><br>
+                                <label for="starting">starting Date</label>
+                                <input type="date" id="startDate" name="starting"
+                                    class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    required>
+                                <label for="expiry">Expire Date</label>
+                                <input type="date" id="endDate" name="expiry"
+                                    class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    required>
+                                <label for="catOfferPercentage">offer</label>
+                                <input type="number" name="catOfferPercentage" id="offer" onkeyup="validatePercentage()"
+                                    class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+                                <div id="percentageError"></div>
+                                <div class="text-center px-5  " style="padding-top:50px ; padding-left:250px ;">
+                                    <button type="submit" class="btn-club">ADD OFFER</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+    </div>
+</main>
+</div>
+</div>
+
+{{!-- date validation --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('#startDate').attr('min', today)
+        $('#startDate').change(function () {
+            let date = document.getElementById('startDate').value
+            $('#endDate').attr('min', date)
+        })
+    })
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+    var percentageError = document.getElementById('percentageError')
+    function validatePercentage() {
+        var percentage = document.getElementById('offer').value.trim();
+        if (percentage > 95 || percentage.length == 0) {
+            percentageError.innerHTML = "Value must be less than 95"
+            percentageError.style.color = "red";
+            return false;
+        }
+        percentageError.innerHTML = 'valid';
+        percentageError.style.color = 'green'
+        return true;
+    }
+    $(document).on("submit", "form", function (e) {
+        if (validatePercentage()) {
+        } else {
+            e.preventDefault();
+            return false;
+        }
+    })
+</script>

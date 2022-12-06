@@ -1,0 +1,360 @@
+<main class="h-full overflow-y-auto">
+  <section>
+    <main class="h-full overflow-y-auto">
+      <div class="container px-6 mx-auto grid">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+          Dashboard
+        </h2>
+        <!-- Cards -->
+        <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+          <!-- Card -->
+          <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
+                </path>
+              </svg>
+            </div>
+            <div>
+              <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                Total clients
+              </p>
+              <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                {{Users}}
+              </p>
+            </div>
+          </div>
+          <!-- Card -->
+          <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                TOTAL PRODUCTS
+              </p>
+              <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                {{Products}}
+              </p>
+            </div>
+          </div>
+          <!-- Card -->
+          <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div
+              class="TOTAL PRODUCTSp-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                </path>
+              </svg>
+            </div>
+            <div>
+              <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                TOTAL ORDERS
+              </p>
+              <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                {{Orders}}
+              </p>
+            </div>
+          </div>
+          <!-- Card -->
+          <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                Total Revenue
+              </p>
+              <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                {{revenue}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Charts -->
+        <a href="/admin/sale-report">
+          <button
+            class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            show sale report
+          </button>
+        </a>
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+          Charts
+        </h2>
+        <div class="grid gap-6 mb-8 md:grid-cols-2">
+          <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+              DAILY
+            </h4>
+            <canvas id="chart1"></canvas>
+            {{!-- ++++++++++++++++++++++++++++++++++++++ --}}
+            <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            </div>
+          </div>
+          <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+              Weekly
+            </h4>
+            <canvas id="weeklysales"></canvas>
+            {{!-- ++++++++++++++++++++++++++++++++ --}}
+            <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-6 mb-8 md:grid-cols-2">
+          <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+              Monthly
+            </h4>
+            <canvas id="monthlysales"></canvas>
+            {{!-- ++++++++++++++++++++++++++++++ --}}
+            <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            </div>
+          </div>
+          <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+              Yearly
+            </h4>
+            <canvas id="yearlySales"></canvas>
+            {{!-- ++++++++++++++++++++++++++++++++++++++++ --}}
+            <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</main>
+</div>
+</div>
+<script src="/javascripts/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  let myChart = document.getElementById('chart1')
+  fetch('/admin/admin-dashbord/day', {
+    method: 'get',
+  }).then((val) => val.json())
+    .then((data) => {
+      console.log(data);
+      let xaxis = []
+      let countss = []
+      for (const val of data) {
+        let date = `${val.detail.day}/${val.detail.month}/${val.detail.year}`
+        xaxis.push(date)
+        countss.push(val.count)
+      }
+      const masspopChart = new Chart(myChart, {
+        type: 'pie',
+        data: {
+          labels: [...xaxis],
+          datasets: [{
+            label: 'Number of orders',
+            data: [...countss],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(245, 125, 75, 1.2)',
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      })
+    }).catch((error) => {
+      console.log(error)
+    })
+</script>
+
+<script>
+  let weekly = [0, 0, 0, 0, 0, 0, 0]
+  let yearName = []
+  let yearly = []
+  let weekName = ["Sunday", "Monday", "Tuesday", "WednesDay", "Thursday", "Friday", "Saturday"]
+  let monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  let monthlyProfit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  try {
+    $.ajax({
+      type: "post",
+      url: "/admin/admin-dashbord/graphdata",
+      success: (data) => {
+        for (i = 0; i < data.data.weeklySales.length; ++i) {
+
+          switch (data.data.weeklySales[i].date) {
+
+            case 1:
+              weekly[0] = data.data.weeklySales[i].total
+              break;
+            case 2:
+              weekly[1] = data.data.weeklySales[i].total
+              break;
+            case 3:
+              weekly[2] = data.data.weeklySales[i].total
+              break;
+            case 4:
+              weekly[3] = data.data.weeklySales[i].total
+              break;
+            case 5:
+              weekly[4] = data.data.weeklySales[i].total
+              break;
+            case 6:
+              weekly[5] = data.data.weeklySales[i].total
+              break;
+            case 7: weekly[6] = data.data.weeklySales[i].total
+              break;
+          }
+        }
+        for (i = 0; i < data.data.monthlySales.length; ++i) {
+
+          switch (data.data.monthlySales[i].month) {
+            case 1:
+              monthlyProfit[0] = data.data.monthlySales[i].total
+              break;
+            case 2:
+              monthlyProfit[1] = data.data.monthlySales[i].total
+              break;
+            case 3:
+              monthlyProfit[2] = data.data.monthlySales[i].total
+              break;
+            case 4:
+              monthlyProfit[3] = data.data.monthlySales[i].total
+              break;
+            case 5:
+              monthlyProfit[4] = data.data.monthlySales[i].total
+              break;
+            case 6:
+              monthlyProfit[5] = data.data.monthlySales[i].total
+              break;
+            case 7:
+              monthlyProfit[6] = data.data.monthlySales[i].total
+              break;
+            case 8:
+              monthlyProfit[7] = data.data.monthlySales[i].total
+              break;
+            case 9:
+              monthlyProfit[8] = data.data.monthlySales[i].total
+              break;
+            case 10:
+              monthlyProfit[9] = data.data.monthlySales[i].total
+              break;
+            case 11:
+              monthlyProfit[10] = data.data.monthlySales[i].total
+              break;
+            case 12:
+              monthlyProfit[11] = data.data.monthlySales[i].total
+              break;
+          }
+        }
+        for (i = 0; i < data.data.yearlySales.length; ++i) {
+          yearName.push(data.data.yearlySales[i].year)
+          yearly.push(data.data.yearlySales[i].total)
+        }
+        const yearlysales = new Chart(
+          document.getElementById('yearlySales'),
+          yearlyconfig
+        );
+        const weeklysales = new Chart(
+          document.getElementById('weeklysales'),
+          config
+        );
+        const monthlysales = new Chart(
+          document.getElementById('monthlysales'),
+          yeralyconfig
+        );
+      }
+    });
+    
+    //weekly sales
+    const labels = weekName;
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Weekly sales',
+       // backgroundColor: 'blue',
+              backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(245, 125, 75, 1.2)',
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)'
+            ],
+        borderColor: 'blue',
+        data: weekly,
+      }]
+    };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {}
+    };
+
+    //monthly Sales
+    const months = monthName;
+
+    const data1 = {
+      labels: months,
+      datasets: [{
+        label: 'Monthly sales',
+        backgroundColor: "red",
+        borderColor: 'red',
+        data: monthlyProfit,
+        
+      }]
+    };
+
+    const yeralyconfig = {
+      type: 'bar',
+      data: data1,
+      options: {}
+    };
+
+    //yearly sales
+    const yearlyLabel = yearName;
+
+    const data2 = {
+      labels: yearlyLabel,
+      datasets: [{
+        label: 'Yearly sales',
+        backgroundColor: 'green',
+        borderColor: 'green',
+        data: yearly,
+      }]
+    };
+
+    const yearlyconfig = {
+      type: 'bar',
+      data: data2,
+      options: {}
+    };
+  } catch (err) {
+    console.log('fdsh', err)
+  }
+</script>

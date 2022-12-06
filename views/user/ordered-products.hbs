@@ -1,0 +1,240 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+    .container {
+        margin-top: 50px;
+        margin-bottom: 50px
+    }
+
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0.10rem
+    }
+
+    .card-header:first-child {
+        border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0;
+    }
+
+    .track {
+        position: relative;
+        background-color: #ddd;
+        height: 7px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 60px;
+        margin-top: 50px;
+    }
+
+    .track .step {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        width: 25%;
+        margin-top: -18px;
+        text-align: center;
+        position: relative;
+    }
+
+    .track .step.active:before {
+        background: #011e3c;
+    }
+
+    .track .step::before {
+        height: 7px;
+        position: absolute;
+        content: "";
+        width: 100%;
+        left: 0;
+        top: 18px;
+    }
+
+    .track .step.active .icon {
+        background: #1f7405;
+        color: #fff;
+    }
+
+    .track .icon {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        border-radius: 100%;
+        background: #ddd;
+    }
+
+    .track .step.active .text {
+        font-weight: 400;
+        color: #000;
+    }
+
+    .track .text {
+        display: block;
+        margin-top: 7px;
+    }
+</style>
+
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="container-fluid"><br>
+            <h2>Order Details</h2>
+        </div>
+        <div class="track">
+            {{#if track.isPending}}
+            <div class="step active"> <span class="icon bg-warning"> <i class="fa fa-ban "></i> </span> <span
+                    class="text" style="font-size: 13px;"> Pending</span>
+                <p style="font-size: 10px;">{{track.pendingDate}}</p>
+            </div>
+            {{else}}
+            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text"
+                    style="font-size: 13px;">Order
+                    confirmed</span>
+                <p style="font-size: 10px;">{{track.date}}</p>
+            </div>
+            {{/if}}
+            {{#if track.isShipped}}
+            <div class="step active"> <span class="icon"> <i class="fa fa-light fa-truck"></i> </span> <span
+                    class="text" style="font-size: 13px;"> Shipped</span>
+                <p style="font-size: 10px;">{{track.shippedDate}}</p>
+            </div>
+            {{!-- {{else}}
+            <div class="step"> <span class="icon"> <i class="fa fa-light fa-truck"></i> </span> <span class="text">
+                    Shipped</span> </div> --}}
+            {{/if}}
+            {{#if track.isOutOfDelivery}}
+            <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span>
+                <span class="text" style="font-size: 13px;"> Out Of delivery</span>
+                <p style="font-size: 10px;">{{track.outOfDeliveryDate}}</p>
+            </div>
+            {{!-- {{else}}
+            <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text">Out
+                    Of Delivery</span> </div> --}}
+            {{/if}}
+            {{#if track.isDelivered}}
+            <div class="step active"> <span class="icon"> <i class="fa fa-sharp fa-solid fa-truck"></i> </span>
+                <span class="text" style="font-size: 13px;">Delivered</span>
+                <p style="font-size: 10px;">{{track.deliveredDate}}</p>
+            </div>
+            {{!-- {{else}}
+            <div class="step"> <span class="icon"> <i class="fa fa-sharp fa-solid fa-truck"></i> </span> <span
+                    class="text">Delivered</span> </div> --}}
+            {{/if}}
+            {{#if returned}}
+            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span>
+                <span class="text" style="font-size: 13px;">Returned</span>
+                <p style="font-size: 10px;">{{returned}}</p>
+            </div>
+            {{/if}}
+            {{#if track.isCancelled}}
+            <div class="step active"> <span class="icon bg-danger"> <i class="fa fa-ban"></i> </span>
+                <span class="text" style="font-size: 13px;">Cancelled</span>
+                <p style="font-size: 10px;">{{track.cancelledDate}}</p>
+            </div>
+            {{/if}}
+            {{#if track.isRefunded}}
+            <div class="step active"> <span class="icon bg-success"> <i class="fa fa-check"></i> </span>
+                <span class="text" style="font-size: 13px;">Refunded</span>
+                <p style="font-size: 10px;">{{track.refundedDate}}</p>
+            </div>
+            {{/if}}
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-3">
+                <div style="overflow-x: auto;">
+                    <font size="2" face="">
+                        <table class="table" id="viewusers">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Address</th>
+
+                                    <th scope="col">Payment Method</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Coupon</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{orderdetails.date}}</td>
+                                    <td>{{orderdetails.deliveryDitails.homeaddress}}<br>{{orderdetails.deliveryDitails.fullAddress}}<br>{{orderdetails.deliveryDitails.Country}}<br>{{orderdetails.deliveryDitails.town}}<br>{{orderdetails.deliveryDitails.district}}<br>PIN:{{orderdetails.deliveryDitails.pincode}}
+                                    </td>
+
+                                    <td>{{orderdetails.paymentMethod}}</td>
+                                    <td> {{orderdetails.status}}</td>
+                                      <td> {{orderdetails.total}}</td>
+                                      {{#if orderdetails.couponOffer}}
+                                    <h4>COUPON  APPLYED</h4>
+                                    <td class="text-success "> <b>
+                                    Coupon Offer  : {{orderdetails.couponOffer}}% <br>
+
+                                    </b>
+                                        {{!-- Coupon Name : {{orderdetails.couponName}}<br> --}}
+                                     {{!-- Coupon Id  :{{orderdetails.couponId}} --}}
+                                     {{else}}
+                                      <td>COUPON NOT APPLYED</td>
+                                      {{/if}}
+
+                                    
+                                     </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </font>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-5">
+                <div style="overflow-x: auto;">
+                    <font size="2" face="">
+                        <table class="table" id="viewusers">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {{#each orderItems}}
+                                <tr>
+                                    <td><img class="img-fluid" style="height: 95px;width: 110px;"
+                                            src="/assets/product-images/{{this.product._id}}.jpg" alt="">
+                                    </td>
+                                    {{#if product.actualPrice}}
+                                    <td>₹ {{product.price}} <del style="color: red;">₹{{product.actualPrice}}</del></td>
+                                    {{else}}
+                                    <td>₹ {{product.price}}</td>
+                                    {{/if}}
+                                    <td> {{product.Name}}</td>
+                                    <td>{{product.category}}</td>
+                                    <td> {{this.quantity}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </font>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

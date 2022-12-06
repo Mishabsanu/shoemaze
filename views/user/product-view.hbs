@@ -1,0 +1,280 @@
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__left product__thumb nice-scroll">
+                        <a class="pt active" href="#product-1">
+                            <img src="/assets/product-images/{{product._id}}.jpg" alt="">
+                        </a>
+                        <a class="pt" href="#product-2">
+                            <img src="/assets/product-images/{{product._id}}2.jpg" alt="">
+                        </a>
+                        <a class="pt" href="#product-3">
+                            <img src="/assets/product-images/{{product._id}}3.jpg" alt="">
+                        </a>
+                        <a class="pt" href="#product-4">
+                            <img src="/assets/product-images/{{product._id}}4.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="product__details__slider__content">
+                        <div class="product__details__pic__slider owl-carousel ">
+                            <img data-hash="product-1" class="product__big__img zoom"
+                                src="/assets/product-images/{{product._id}}.jpg " alt="">
+                            <img data-hash="product-2" class="product__big__img zoom"
+                                src="/assets/product-images/{{product._id}}2.jpg" alt="">
+                            <img data-hash="product-3" class="product__big__img zoom"
+                                src="/assets/product-images/{{product._id}}3.jpg" alt="">
+                            <img data-hash="product-4" class="product__big__img zoom"
+                                src="/assets/product-images/{{product._id}}4.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <h3>{{product.Name}} <span></span></h3>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <span>( 138 reviews )</span>
+                    </div>
+                    {{#if product.catOfferPercentage}}
+                    <div class="product__details__price">₹{{product.price}}
+                        <span>₹{{product.actualPrice}}</span><br>{{product.catOfferPercentage}}% off
+                    </div>
+                    {{else if product.productOfferPercentage}}
+                    <div class="product__details__price">₹{{product.price}}
+                        <span>₹{{product.actualPrice}}</span><br>{{product.productOfferPercentage}}% off
+                    </div>
+                    {{else}}
+                    <div class="product__details__price">₹{{product.price}}
+                    </div>
+                    {{/if}}
+                    {{#if product.fewStock}}
+                    <p class="text-danger">Only Few Available!</p>
+                    {{/if}}
+                    {{#if product.noStock}}
+                    <p class="text-danger">Out Of Stock!</p>
+                    {{/if}}
+                    <p>{{product.discriptions}}
+                    </p>
+                    <div class="product__details__button">
+                        <button class="cart-btn" onclick="addToCart('{{product._id}}')">Add to cart</button>
+                        <ul>
+                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__details__widget">
+                        <ul>
+                            <li>
+                                <span>Availability:</span>
+                                <div class="stock__checkbox">
+                                    <label for="stockin">
+                                        In Stock
+                                        <input type="checkbox" id="stockin">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Available size:</span>
+                                <div class="size__btn">
+                                    <label for="xs-btn" class="active">
+                                        <input type="radio" id="xs-btn">
+                                        5
+                                    </label>
+                                    <label for="s-btn">
+                                        <input type="radio" id="s-btn">
+                                        6
+                                    </label>
+                                    <label for="m-btn">
+                                        <input type="radio" id="m-btn">
+                                        7
+                                    </label>
+                                    <label for="l-btn">
+                                        <input type="radio" id="l-btn">
+                                        8
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                        </li>
+                        {{!-- <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <h6>Description</h6>
+                            <p>{{product.discriptions}}</p>
+                            <p></p>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <h6>Reviews ( 2 )</h6>
+                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                                consequat massa quis enim.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                quis, sem.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="related__title">
+                    <h5>RELATED PRODUCTS</h5>
+                </div>
+            </div>
+            <div class="row property__gallery">
+                {{#each onePro}}
+                <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg=""><img
+                                src="/assets/product-images/{{this._id}}.jpg" alt="not show">
+                            {{#if catOfferPercentage}}
+                            <div class="label new">{{this.catOfferPercentage}}% off</div>
+                            {{/if}}
+                            {{#if productOfferPercentage}}
+                            <p class="label new">{{productOfferPercentage}}<small>%off</small></p>
+                            {{/if}}
+                            <ul class="product__hover">
+                                <li><a href="/assets/product-images/{{this._id}}.jpg" class="image-popup"><span
+                                            class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                            </a>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="/product-view/{{this._id}}">{{this.Name}}</a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price">{{#if actualPrice}}₹ {{this.price}}<span> <del>₹
+                                        {{this.actualPrice}}</del></span>{{else}}₹ {{this.price}}{{/if}}</div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+</section>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function addToCart(proId) {
+        $.ajax({
+            url: "/add-to-cart/" + proId,
+            method: "get",
+            success: (response) => {
+                if (response.status == "add") {
+                    let count = $("#cart-count").html();
+                    count = parseInt(count) + 1;
+                    $("#cart-count").html(count);
+                    Swal.fire({
+                        icon: "success",
+                        title: "Item added to Cart",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    }).then(() => {
+                        location.reload()
+
+                    })
+                } else if (response.status == "noStock") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops..!",
+                        text: "Out Of Stock!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else if (response.status == "fewStock") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops..!",
+                        text: "Out Of Stock!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else if (response.status == "maxLimitStock") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Oops..!",
+                        text: "Limit Is Reached!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else {
+                    location.href = "/login";
+                }
+            },
+        });
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.zoom').imagezoomsl({
+            zoomrange: [3, 3]
+        });
+    })
+</script>
+
+
+
+
+
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/assets/js/main.js"></script>

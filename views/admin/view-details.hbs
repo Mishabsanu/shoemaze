@@ -1,0 +1,120 @@
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container px-6 mx-auto grid">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        </h2>
+        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full whitespace-no-wrap" id="orderTable">
+                        <thead>
+                            <tr
+                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                <th class="px-4 py-3">Name</th>
+                                <th class="px-4 py-3">Email</th>
+                                <th class="px-4 py-3">Product Name</th>      
+                                <th class="px-4 py-3">Category Name</th>                          
+                                <th class="px-4 py-3">Price </th>
+                                <th class="px-4 py-3">Payment mode</th>
+                                <th class="px-4 py-3">Status</th>
+                                <th class="px-4 py-3">Full Address</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                            {{#each order}}
+                            <tr class="text-gray-700 dark:text-gray-400" style="text-align: center;">
+                                <td class="px-4 py-3">
+                                    {{this.Nameuser}}
+                                </td>
+                                <td class="px-4 py-3">
+                                    {{this.email}}
+                                </td>
+                                <td class="px-4 py-3">
+                                    {{this.name}}
+                                </td>
+                                   <td class="px-4 py-3">
+                                    {{this.Category}}
+                                </td>
+                                {{#if discountPrice}}
+                                <td class="px-4 py-3">
+                                    ₹ {{this.totalAmount}}<del style="padding-left:10px ; color:red ;">{{this.discountPrice}}</del>
+                                </td>
+                                {{else}}
+                                 <td class="px-4 py-3">
+                                    ₹ {{this.totalAmount}}
+                                </td>
+                                {{/if}}
+                                <td class="px-4 py-3">
+                                    {{this.payment}}
+                                </td>
+                                 <td class="px-4 py-3">
+                                    {{this.status}}
+                                </td>
+
+                                <td class="px-4 py-3">
+                                    {{this.homeaddress}}<br>{{this.fulladdress}}<br> {{this.town}}<br> {{this.Country}}<br>  {{this.pincode}}<br>
+                                </td>                                                
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+</div>
+
+
+{{!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+<style>
+  tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+ </script>
+
+ <script>
+  $(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#orderTable tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+ 
+    // DataTable
+    var table = $('#orderTable').DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+ 
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+        },
+    });
+});
+</script>

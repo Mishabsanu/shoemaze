@@ -1,0 +1,42 @@
+<main class="h-full overflow-y-auto">
+    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+        <div class="flex-1 h-full max-w-xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+            <div class="flex flex overflow-y-auto ">
+                <div class="flex items-center justify-center p-6  sm:p-12  ">
+                    <div class="">
+                        <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
+                            style="padding-left:150px ;">
+                            EDIT PRODUCT OFFER
+                        </h1>
+                        <form action="/admin/edit-productoffer/{{proOfferDetails._id}}" method="post">
+                            <label for="product">PRODUCT</label>
+                            <select name="product" class="form-control">
+                                {{#each product}}
+                                <option>{{this.Name}}</option>
+                                {{/each}}
+                            </select><br><br><br>
+                            <label for="starting">starting Date</label>
+                            <input type="date" id="startDate" name="starting" value="{{proOfferDetails.starting}}"
+                                class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                required>
+                            <label for="expiry">Expire Date</label>
+                            <input type="date" id="endDate" name="expiry" value="{{proOfferDetails.expiry}}"
+                                class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                required>
+                            <label for="productOfferPercentage">offer</label>
+                            <input type="number" name="productOfferPercentage" id="offer" onkeyup="validatePercentage()"
+                                value="{{proOfferDetails.productOfferPercentage}}"
+                                class="form-controlblock w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+                            <div id="percentageError"></div>
+                            <div class="text-center px-5  " style="padding-top:50px ; padding-left:250px ;">
+                                <button type="submit" class="btn-club">EDIT PRODUCT OFFER</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+</div>
