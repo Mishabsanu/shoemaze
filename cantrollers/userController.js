@@ -309,10 +309,13 @@ const userController = {
 
     changeProductQuantityPost: async (req, res, next) => {
         try {
-            cartHelpers.changeProductQuantity(req.body).then(async (response) => {
-                response.total = await cartHelpers.getTotalAmount(req.body.user);
-                // response.cartSubTotal = await cartHelpers.getCartSubTotal(userId, proId);
-                res.json(response);
+            var obj = req.body
+            obj.user = await req.session.user._id
+            cartHelpers.changeProductQuantity(obj).then(async (response) => {
+                total = await cartHelpers.getTotalAmount(req.session.user._id)
+                //resposnill varunna data convert cheyyunne ennitte json pass cheyyunnu
+                response.total = total
+                res.json(response)
             }).catch((response) => {
                 if (response.status || response.noStock) {
                     res.json({ noStock: true });
@@ -347,9 +350,9 @@ const userController = {
             let product = await categoryHelpers.getAllCategoryProduct(req.params.id)
             let cartsProducts = await cartHelpers.getCartList(req.session.user._id)
             let category = await categoryHelpers.getAllCategory()
-            let listcoupon =await couponHelpers.getAllCoupons()
-            console.log('351 = ',listcoupon);
-            res.render('user/place-order', { user: true, wallet, category, total, user: req.session.user, cartsProducts, product, users, cartCount, eachAddress, alladdress, person,listcoupon })
+            let listcoupon = await couponHelpers.getAllCoupons()
+            console.log('351 = ', listcoupon);
+            res.render('user/place-order', { user: true, wallet, category, total, user: req.session.user, cartsProducts, product, users, cartCount, eachAddress, alladdress, person, listcoupon })
         } catch (error) {
             console.log('somthing wrong in placeOrderGet ');
         }
@@ -645,18 +648,18 @@ const userController = {
 
             let userId = req.session.user._id
             let user = await userHelpers.getUserDetails(userId)
-            if(user.walletHistory==undefined){
-                user.walletHistory==false
-            }else{
+            if (user.walletHistory == undefined) {
+                user.walletHistory == false
+            } else {
                 user.walletHistory.forEach(element => {
                     let a = element.date.toISOString().split('T')[0]
                     console.log(a);
                     element.date = a;
                 });
             }
-            console.log(user.walletHistory,'oooooo');
+            console.log(user.walletHistory, 'oooooo');
 
-           
+
             console.log(user, 'userrrrrrrrr');
             let users = req.session.user
             let userss = req.session.user
