@@ -19,6 +19,7 @@
 
 
 <!-- Shop Cart Section Begin -->
+{{#if user.walletHistory}}
 <section class="shop-cart spad " style="text-align: center;">
     <div class="container-fluid">
         <h4>Wallet History</h4>
@@ -63,6 +64,11 @@
         </div>
     </div>
 </section>
+{{else}}
+<div class="container">
+    <h1>Wallet History EMPTY</h1>
+</div>
+{{/if}}
 <!-- Shop Cart Section End -->
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

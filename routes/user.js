@@ -54,7 +54,7 @@ router.get('/show-category/:id',verifyLogin,userController.showCategoryIdGet);
 
 router.get('/view-cart',verifyBlock,verifyLogin,userController.viewCartGet);
 
-router.get('/add-to-cart/:id',verifyBlock,verifyLogin,userController.addToCartGet)
+router.get('/add-to-cart/:id',verifyLogin,userController.addToCartGet)
 ;
 router.patch('/change-product-quantity',verifyLogin,userController.changeProductQuantityPost);
 

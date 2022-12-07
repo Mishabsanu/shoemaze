@@ -1,5 +1,116 @@
 <!-- chek out -->
 
+
+<style>
+    .copy-text {
+        position: relative;
+        padding: 5px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        display: flex;
+        width: 250px;
+
+    }
+
+    .copy-text input.text {
+        font-size: 18px;
+        color: #555;
+        border: none;
+        outline: none;
+    }
+
+    .copy-text button {
+        padding: 5px;
+        background: #5784f5;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+</style>
+<style>
+    .dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dd-button {
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 30px 10px 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dd-button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+
+.dd-button:hover {
+  background-color: #eeeeee;
+}
+
+
+.dd-input {
+  display: none;
+}
+
+.dd-menu {
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px 0 0 0;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  list-style-type: none;
+}
+
+.dd-input + .dd-menu {
+  display: none;
+} 
+
+.dd-input:checked + .dd-menu {
+  display: block;
+} 
+
+.dd-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dd-menu li:hover {
+  background-color: #f6f6f6;
+}
+
+.dd-menu li a {
+  display: block;
+  margin: -10px -20px;
+  padding: 10px 20px;
+}
+
+.dd-menu li.divider{
+  padding: 0;
+  border-bottom: 1px solid #cccccc;
+}
+</style>
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
@@ -49,7 +160,7 @@
                 </div>
             </div>
             <div class="col-md-6 ">
-                <div class="discount__content">
+                <div class="discount__content" >
                     <h6>Discount codes</h6>
                     <form action="">
                         <div class="" style="border: solid 1px;border-radius: 69px;">
@@ -58,7 +169,43 @@
                                 style="height: 45px;padding-left: 33px;">Apply</button>
                         </div>
                     </form>
+
+                </div><br>
+                <label class="dropdown">
+
+                    <div class="dd-button">
+                        Select coupon
+                    </div>
+
+                    <input type="checkbox" class="dd-input" id="test">
+
+                    <ul class="dd-menu">
+                        {{#each listcoupon}}
+                        <li>
+                            <div class="copy-text ">
+                                <input type="text"  class="text" value='{{this.coupon}}' >
+                                <button class="bg-dark " id="{{this.coupon}}coupon" onclick="selectCoupon('{{this.coupon}}')"><i class="fa fa-clone "></i></button>
+                            </div>
+                        </li>
+                        {{/each}}
+        
+                    </ul>
+
+                </label>
+
+
+
+                {{!-- <div class="label">
+                    coupon
                 </div>
+                <div class="copy-text">
+                    <input type="text" class="text" value="david@stylus.co.za" />
+                    <button><i class="fa fa-clone"></i></button>
+                </div> --}}
+
+
+
+
                 <form action="/place-order" method="post" class="checkout__form m-" id="checkout-form">
                     <input type="text" id="ID" name="id" value="" hidden>
                     <div class="checkout__form__input">
@@ -189,7 +336,12 @@
 </script>
 
 
-
+<script>
+    function selectCoupon(coupon){
+        //alert(coupon)
+        document.getElementById('coupon').value = coupon
+    }
+</script>
 
 
 
@@ -293,32 +445,32 @@
             method: 'post',
             data: $('#checkout-form').serialize(),
             success: (response) => {
-         
+
                 //alert("order placed")
-                 
+
                 if (response.codStatus) {
                     //location.href = '/payment-success'
                     Swal.fire({
-                    icon: "success",
-                    title: "ORDER PLACED SUCCESS",
-                    showConfirmButton: false,
-                    timer: 2000,
-                }).then(()=>{
-                    location.href = '/payment-success'
-                })
+                        icon: "success",
+                        title: "ORDER PLACED SUCCESS",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    }).then(() => {
+                        location.href = '/payment-success'
+                    })
                 } else if (response.paypal) {
 
                     location.href = response.link
 
                 } else if (response.result) {
                     Swal.fire({
-                    icon: "success",
-                    title: "ORDER PLACED SUCCESS",
-                    showConfirmButton: false,
-                    timer: 1000,
-                }).then(()=>{
-                    location.href = '/payment-success'
-                })
+                        icon: "success",
+                        title: "ORDER PLACED SUCCESS",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    }).then(() => {
+                        location.href = '/payment-success'
+                    })
                     //location.href = '/payment-success'
                 } else {
                     razorpayPayment(response)
@@ -369,13 +521,13 @@
                 if (response.status) {
                     //location.href = '/payment-success'
                     Swal.fire({
-                    icon: "success",
-                    title: "ORDER PLACED SUCCESS",
-                    showConfirmButton: false,
-                    timer: 1000,
-                }).then(()=>{
-                    location.href = '/payment-success'
-                })
+                        icon: "success",
+                        title: "ORDER PLACED SUCCESS",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    }).then(() => {
+                        location.href = '/payment-success'
+                    })
                 } else {
                     alert('payment failed')
                 }
@@ -396,4 +548,18 @@
         list2.add("sft");
         list.remove("sft");
     }
+</script>
+<script>
+    let copyText = document.querySelector(".copy-text");
+    copyText.querySelector("button").addEventListener("click", function () {
+        let input = copyText.querySelector("input.text");
+        input.select();
+        document.execCommand("copy");
+        copyText.classList.add("active");
+        window.getSelection().removeAllRanges();
+        setTimeout(function () {
+            copyText.classList.remove("active");
+        }, 2500);
+    });
+
 </script>

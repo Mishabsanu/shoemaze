@@ -54,6 +54,7 @@ const userController = {
                             element.noStock = true;
                         }
                     });
+                    console.log(category);
                     res.render('user/main', { user: true, category, products, users: true, person, cartCount });
                 });
             }
@@ -346,7 +347,9 @@ const userController = {
             let product = await categoryHelpers.getAllCategoryProduct(req.params.id)
             let cartsProducts = await cartHelpers.getCartList(req.session.user._id)
             let category = await categoryHelpers.getAllCategory()
-            res.render('user/place-order', { user: true, wallet, category, total, user: req.session.user, cartsProducts, product, users, cartCount, eachAddress, alladdress, person, })
+            let listcoupon =await couponHelpers.getAllCoupons()
+            console.log('351 = ',listcoupon);
+            res.render('user/place-order', { user: true, wallet, category, total, user: req.session.user, cartsProducts, product, users, cartCount, eachAddress, alladdress, person,listcoupon })
         } catch (error) {
             console.log('somthing wrong in placeOrderGet ');
         }
@@ -610,6 +613,7 @@ const userController = {
 
     postApplyCoupon: async (req, res) => {
         try {
+            console.log(req.body);
             let id = req.session.user._id
             let coupon = req.body.coupon
             let totalAmount = await cartHelpers.getTotalAmount(req.session.user._id)
@@ -637,14 +641,22 @@ const userController = {
 
     viewWalletHistory: async (req, res) => {
         try {
+            console.log('hii');
 
             let userId = req.session.user._id
             let user = await userHelpers.getUserDetails(userId)
-            user.walletHistory.forEach(element => {
-                let a = element.date.toISOString().split('T')[0]
-                console.log(a);
-                element.date = a;
-            });
+            if(user.walletHistory==undefined){
+                user.walletHistory==false
+            }else{
+                user.walletHistory.forEach(element => {
+                    let a = element.date.toISOString().split('T')[0]
+                    console.log(a);
+                    element.date = a;
+                });
+            }
+            console.log(user.walletHistory,'oooooo');
+
+           
             console.log(user, 'userrrrrrrrr');
             let users = req.session.user
             let userss = req.session.user
@@ -653,6 +665,7 @@ const userController = {
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
             res.render('user/walletHistory', { user: true, user, userss, person, category, users, cartCount })
         } catch (error) {
+            console.log(error);
             res.redirect('/wrong')
 
         }
