@@ -18,11 +18,11 @@
     <div class="offcanvas__close">+</div>
     <ul class="offcanvas__widget">
         <li><span class="icon_search search-switch"></span></li>
-        <li><a href="/user/wishlist"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
+        <li><a href="#"><span class="icon_heart_alt"></span>
+                <div class="tip">0</div>
             </a></li>
-        <li><a href="/add-to-cart/{{thid._id}}"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
+        <li><a href="/view-cart/{{this._id}}"><span class="icon_bag_alt"></span>
+                <div class="tip" id="cart-Count">{{cartCount}}</div>
             </a></li>
     </ul>
     <div class="offcanvas__logo">
@@ -31,8 +31,18 @@
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
+        {{#if users}}
+        <a href="/logout" onclick="return confirm('Are you want logout ?')">Logout</a>
+        {{else}}
         <a href="/login">Login</a>
+        {{/if}}
+        {{#if person}}
+        <a href="/profile">{{person.Name}}</a>
+        {{else}}
         <a href="/signup">Register</a>
+        {{/if}}
+        {{!-- <a href="/login">Login</a>
+        <a href="/signup">Register</a> --}}
     </div>
 </div>
 <!-- Offcanvas Menu End -->
@@ -61,7 +71,7 @@
                 <div class="header__right">
                     <div class="header__right__auth" id="logout">
                         {{#if users}}
-                        <a href="/logout"  onclick="return confirm('Are you want logout ?')">Logout</a>
+                        <a href="/logout" onclick="return confirm('Are you want logout ?')">Logout</a>
                         {{else}}
                         <a href="/login">Login</a>
                         {{/if}}
@@ -74,7 +84,7 @@
                     <ul class="header__right__widget">
                         <li><span class="icon_search search-switch"></span></li>
                         <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
+                                <div class="tip">0</div>
                             </a></li>
                         <li><a href="/view-cart/{{this._id}}"><span class="icon_bag_alt"></span>
                                 <div class="tip" id="cart-Count">{{cartCount}}</div>
@@ -100,4 +110,3 @@
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/jquery.nicescroll.min.js"></script>
 <script src="/assets/js/main.js"></script>
-

@@ -3,13 +3,11 @@ var collection = require('../config/collections');
 var objectId = require('mongodb').ObjectId
 
 
-
-
 module.exports = {
 
     getOrderProduct: (userId) => {
         return new Promise(async (resolve, reject) => {
-            let orders = await db.get().collection(collection.ORDER_COLLECTION).find({ userId: ObjectId(userId) }).sort({ $natural: -1 }).toArray()
+            let orders = await db.get().collection(collection.ORDER_COLLECTION).find({ userId: objectId(userId) }).sort({ $natural: -1 }).toArray()
             console.log(orders);
             resolve(orders)
         })
@@ -19,7 +17,7 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let orderItem = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
                 {
-                    $match: { _id: ObjectId(orderId) }
+                    $match: { _id: objectId(orderId) }
                 },
                 {
                     $unwind: '$product'
@@ -58,7 +56,7 @@ module.exports = {
 
     changeOrderStatus: (orderId, status) => {
         return new Promise(async (resolve, reject) => {
-            await db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) })
+            await db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderId) })
         })
     },
 
@@ -95,7 +93,7 @@ module.exports = {
 
     deleteOrder: (orderId) => {
         return new Promise(async (resolve, reject) => {
-            await db.get().collection(collection.ORDER_COLLECTION).deleteOne({ _id: ObjectId(orderId) }).then((response) => {
+            await db.get().collection(collection.ORDER_COLLECTION).deleteOne({ _id: objectId(orderId) }).then((response) => {
                 resolve(response)
             })
         })

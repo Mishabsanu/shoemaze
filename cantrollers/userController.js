@@ -28,22 +28,17 @@ const userController = {
     //////////////////////////////home page////////////////////////
 
     homePage: async (req, res) => {
-
-        console.log(process.env.serviceSID);
-        console.log(process.env.client_id,
-            process.env.client_secret);
-
-        //let todayDate = new Date().toISOString().slice(0, 10);
-        // let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
-        // let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
-        // let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
+        let todayDate = new Date().toISOString().slice(0, 10);
+        let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
+        let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
+        let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
         try {
             if (req.session.loggedIn) {
                 let userss = req.session.user
                 let todayDate = new Date().toISOString().slice(0, 10);
-                // let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
-                // let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
-                // let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
+                let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
+                let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
+                let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
                 let person = await userHelpers.getUser(userss._id)
                 let cartCount = null
                 if (req.session.user) {
@@ -359,12 +354,12 @@ const userController = {
 
     placeOrderPost: async (req, res) => {
         try {
-            let products = await getCartProductList(req.session.user._id)
+            let products = await cartHelpers.getCartProductList(req.session.user._id)
             if (req.session.couponTotal) {
                 totalPrice = req.session.couponTotal
                 req.session.couponTotal = null
             } else {
-                totalPrice = await getTotalAmount(req.body.userId)
+                totalPrice = await cartHelpers.getTotalAmount(req.body.userId)
             }
             console.log('347 ', req.body);
             cartHelpers.placeOrder(req.body, products, totalPrice).then((orderId) => {
@@ -386,6 +381,7 @@ const userController = {
                 }
             })
         } catch (error) {
+            console.log(error)
             console.log('somthing wrong in  placeOrderPost');
         }
     },
