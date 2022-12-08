@@ -118,10 +118,11 @@ module.exports = {
               .updateOne(
                 { _id: objectId(details.cart) },
                 {
-                  $pull: { products: { item: objectId(details.product) } },
+                  $pull: { product: { item: objectId(details.product) } },
                 }
               )
-              .then(() => {
+              .then((res) => { 
+                console.log(res,"remove product");
                 resolve({ removeProduct: true });
               });
           } else {

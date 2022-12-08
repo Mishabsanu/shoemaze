@@ -55,6 +55,7 @@
                   GATEGORY
                 </span>
                 <select name="category" id="category">
+                  <option value="{{product.category}}">{{product.category}}</option>
                   {{#each category}}
                   <option value="{{this.category}}">{{this.category}}</option>
                   {{/each}}

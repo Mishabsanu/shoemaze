@@ -54,7 +54,7 @@
                                 <td class="cart__quantity ">
                                     <button class=" minus btn btn-link px-2" id="neg-btn"
                                         onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">
-                                        <i class="fas fa-minus"></i>
+                                        <i class="fas fa-minus" id="nill{{this.product._id}}"></i>
                                     </button>
                                     <span class="adva" id="{{this.product._id}}"
                                         name="quantity">{{this.quantity}}</span>
@@ -127,45 +127,31 @@
 <!-- close vise cart -->
 
 <script>
-    function setHIde(quantity, index) {
-        if (quantity == 1) {
-            mb[index].style.visibility = "hidden";
-
-        }
-
-    }
-    let mb = document.querySelectorAll('.minus')
-    let quantityArr = document.querySelectorAll('.adva')
-    function loop() {
-        for (var i = 0; i < quantityArr.length; i++) {
-            setHIde(Number(quantityArr[i].innerHTML), i)
-        }
-    }
-    loop()
-
-    function changeQuantity(cartId, proId, count) {
-
-        let quantity = parseInt(document.getElementById(proId).innerHTML)
+    function changeQuantity(cartId,proId,count){
+        let quantity=parseInt(document.getElementById(proId).innerHTML)
+        count=parseInt(count)
         $.ajax({
-            url: '/change-product-quantity',
-            data: {
-
-                cart: cartId,
-                product: proId,
-                count: count,
-                quantity: quantity
-
+            url:'/change-product-quantity',
+            data:{
+                
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity
             },
-            method: 'patch',
-            success: (response) => {
-                console.log(response,'is the response')
-                if (response.status) {
-
-                  location.reload()
-                    hide()
-
-
-                } else if (response.noStock) {
+            method:'patch',
+            success:(response)=>{
+                console.log(response,'tttttttttttttt')
+                if(response.removeProduct){
+                    console.log("haaajahahahhaahh")
+                    swal(
+                    'Product removed from cart',
+                    'You clicked the button!',
+                    'success'
+                    ).then(()=>{
+                    location.reload()
+                    })
+                }else if(response.noStock){
                     Swal.fire({
                         icon: "error",
                         title: "Oops..!",
@@ -173,7 +159,7 @@
                         showConfirmButton: false,
                         timer: 1000,
                     });
-                } else if (response.maxLimitStock) {
+                }else if(response.maxLimitStock){
                     Swal.fire({
                         icon: "warning",
                         title: "Oops..!",
@@ -181,36 +167,15 @@
                         showConfirmButton: false,
                         timer: 1000,
                     });
-                } else {
-                    document.getElementById(proId).innerHTML = quantity + count
-                    document.getElementById('total').innerHTML = response.total
-                    document.getElementById('subtotal' + proId).innerHTML = response.cartSubTotal
-                    hide()
+                }else{
+                    document.getElementById(proId).innerHTML=quantity+count
+                    document.getElementById('total').innerHTML=response.total
+                    {{!-- document.getElementById('subtotal'+proId).innerHTML = response.cartSubTotal --}}
                 }
             }
-
-
-
         })
-        function hide() {
-            let quantity = parseInt(document.getElementById('span' + proId).innerHTML)
-            setHIde(quantity)
-            console.log(quantity)
-        }
-
-        function setHIde(quantity) {
-            if (quantity == 1) {
-                document.getElementById('neg-btn' + proId).style.visibility = "hidden";
-
-            } else {
-
-                document.getElementById('neg-btn' + proId).style.visibility = "visible";
-            }
-        }
     }
-
 </script>
-
 
 <script>
     function removeCart(proId) {
