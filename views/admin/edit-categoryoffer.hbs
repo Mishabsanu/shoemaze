@@ -11,6 +11,7 @@
                         <form action="/admin/edit-categoryoffer/{{data._id}}" method="post">
                             <label for="category">Category</label>
                             <select name="category" class="form-control">
+                                  <option>{{data.category}}</option>
                                 {{#each category}}
                                 <option>{{this.category}}</option>
                                 {{/each}}

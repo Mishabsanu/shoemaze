@@ -11,6 +11,7 @@
                         <form action="/admin/edit-productoffer/{{proOfferDetails._id}}" method="post">
                             <label for="product">PRODUCT</label>
                             <select name="product" class="form-control">
+                                  <option>{{proOfferDetails.product}}</option>
                                 {{#each product}}
                                 <option>{{this.Name}}</option>
                                 {{/each}}
