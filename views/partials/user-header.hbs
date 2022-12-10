@@ -18,8 +18,9 @@
     <div class="offcanvas__close">+</div>
     <ul class="offcanvas__widget">
         <li><span class="icon_search search-switch"></span></li>
-        <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">0</div>
+
+        <li><a href="/wishlist"><span class="icon_heart_alt"></span>
+                <div class="tip">{{wishCount}}</div>
             </a></li>
         <li><a href="/view-cart/{{this._id}}"><span class="icon_bag_alt"></span>
                 <div class="tip" id="cart-Count">{{cartCount}}</div>
@@ -81,8 +82,8 @@
                     </div>
                     <ul class="header__right__widget">
                         <li><span class="icon_search search-switch"></span></li>
-                        <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">0</div>
+                        <li><a href="/wishlist"><span class="icon_heart_alt"></span>
+                                <div class="tip">{{wishCount}}</div>
                             </a></li>
                         <li><a href="/view-cart/{{this._id}}"><span class="icon_bag_alt"></span>
                                 <div class="tip" id="cart-Count">{{cartCount}}</div>

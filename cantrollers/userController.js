@@ -8,6 +8,7 @@ const cartHelpers = require('../helpers/cart-helpers')
 const addressHelpers = require('../helpers/address-helpers')
 const paymentHelpers = require('../helpers/payment-helpers')
 const couponHelpers = require('../helpers/coupon-helpers');
+const wishHelpers = require('../helpers/wish-helpers');
 var router = express.Router();
 const configTwilio = require('../config/twilio');
 const orderHelpers = require('../helpers/order-helpers');
@@ -41,8 +42,10 @@ const userController = {
                 let startProductOffer = await productofferHelpers.startProductOffer(todayDate)
                 let person = await userHelpers.getUser(userss._id)
                 let cartCount = null
+                let wishCount = null
                 if (req.session.user) {
                     cartCount = await cartHelpers.getCartCount(req.session.user._id)
+                    wishCount = await wishHelpers.getWishListCount(req.session.user._id)
                 }
                 let category = await categoryHelpers.getAllCategory()
                 console.log('categoryDetails', category);
@@ -55,7 +58,7 @@ const userController = {
                         }
                     });
                     console.log(category);
-                    res.render('user/main', { user: true, category, products, users: true, person, cartCount });
+                    res.render('user/main', { user: true, category, products, users: true,wishCount, person, cartCount });
                 });
             }
         } catch (error) {
@@ -191,11 +194,12 @@ const userController = {
             let users = req.session.user
             let category = await categoryHelpers.getAllCategory()
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             productHelpers.getAllProduct().then((products) => {
 
-                res.render('user/all-product', { user: true, products, category, users, cartCount })
+                res.render('user/all-product', { user: true, products, category, users, cartCount,wishCount })
             })
-        } catch (error) {
+        }catch (error) {
             res.redirect('/wrong')
         }
     },
@@ -208,6 +212,7 @@ const userController = {
             let person = await userHelpers.getUser(userss._id)
             let category = await categoryHelpers.getAllCategory()
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let oneCat = await categoryHelpers.getCategory(req.params.id)
             console.log('ererberbewerwerw', oneCat);
             let products = await categoryHelpers.getAllCategoryProduct(oneCat.category)
@@ -219,8 +224,9 @@ const userController = {
                     element.noStock = true;
                 }
             });
-            res.render('user/all-product', { user: true, login: true, products, productss, category, oneCat, userss, users: true, cartCount, person });
+            res.render('user/all-product', { user: true, login: true, products, productss, category, oneCat, userss, users: true, cartCount, person ,wishCount});
         } catch (error) {
+            res.redirect('/wrong')
             res.redirect('/wrong')
         }
     },
@@ -246,6 +252,7 @@ const userController = {
                 }
             });
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let onePro = await productHelpers.getAllProduct(req.params.id)
             let product = await productHelpers.getProductDetails(id)
             if (product.stock <= 10 && product.stock != 0) {
@@ -253,7 +260,7 @@ const userController = {
             } else if (product.stock == 0) {
                 product.noStock = true;
             }
-            res.render('user/product-view', { user: true, product, category, product, productss, products, onePro, userss, users: true, cartCount, zoom: true, person })
+            res.render('user/product-view', { user: true, product,wishCount, category, product, productss, products, onePro, userss, users: true, cartCount, zoom: true, person })
         } catch (error) {
             res.redirect('/wrong')
         }
@@ -268,14 +275,16 @@ const userController = {
             let userss = req.session.user
             let person = await userHelpers.getUser(userss._id)
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let totalValue = await cartHelpers.getTotalAmount(req.session.user._id)
             console.log(totalValue);
             let category = await categoryHelpers.getAllCategory()
             let products = await cartHelpers.getCartList(req.session.user._id)
             const userId = await req.session.user._id
-            res.render('user/view-cart', { user: true, category, products, cartCount, totalValue, userId, users, person })
+            res.render('user/view-cart', { user: true, category, products, cartCount,wishCount, totalValue, userId, users, person })
 
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in view cart get');
 
         }
@@ -339,6 +348,7 @@ const userController = {
 
             let person = await userHelpers.getUser(userss._id)
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let eachAddress = await addressHelpers.getAddressbyId(users._id)
             let address = await userHelpers.getAllAddress(req.session.user._id)
             let alladdress = address.address
@@ -352,8 +362,9 @@ const userController = {
             let category = await categoryHelpers.getAllCategory()
             let listcoupon = await couponHelpers.getAllCoupons()
             console.log('351 = ', listcoupon);
-            res.render('user/place-order', { user: true, wallet, category, total, user: req.session.user, cartsProducts, product, users, cartCount, eachAddress, alladdress, person, listcoupon })
+            res.render('user/place-order', { user: true, wallet,wishCount, category, total, user: req.session.user, cartsProducts, product, users, cartCount, eachAddress, alladdress, person, listcoupon })
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in placeOrderGet ');
         }
     },
@@ -387,7 +398,9 @@ const userController = {
                 }
             })
         } catch (error) {
+            res.redirect('/wrong')
             console.log(error)
+         
             console.log('somthing wrong in  placeOrderPost');
         }
     },
@@ -405,6 +418,7 @@ const userController = {
                 res.json({ status: false, erMsg: 'payment failed' })
             })
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in verifyPaymentPost ');
         }
     },
@@ -416,6 +430,7 @@ const userController = {
             let person = await userHelpers.getUser(userss._id)
             let category = await categoryHelpers.getAllCategory()
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let order = await orderHelpers.getOrderProduct(req.session.user._id)
             order.forEach(element => {
                 let a = element.date.toISOString().split('T')[0]
@@ -431,8 +446,9 @@ const userController = {
                     element.returned = true;
                 }
             });
-            res.render('user/myorder', { user: true, users, userss, category, cartCount, order, person, order })
+            res.render('user/myorder', { user: true, users, userss,wishCount, category, cartCount, order, person, order })
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in myOrderGet ');
         }
     },
@@ -465,6 +481,7 @@ const userController = {
             let userss = req.session.user
             let person = await userHelpers.getUser(userss._id)
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let category = await categoryHelpers.getAllCategory()
             let orderId = req.params.id
             console.log(orderId, 'ooooooooooooooooooooooooooooooooooooooooooo');
@@ -476,8 +493,9 @@ const userController = {
             // let coupon=await couponHelpers.getCoupon(coupId)
             // console.log('allCoupon',coupon);
             console.log(orderItems, 'koiiiiiiiiiiiiiii');
-            res.render('user/ordered-products', { orderItems, user: true, users, userss, category, zoom: true, cartCount, orderdetails, person })
+            res.render('user/ordered-products', { orderItems, user: true, users,wishCount, userss, category, zoom: true, cartCount, orderdetails, person })
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in  orderedproductGet');
         }
     },
@@ -507,11 +525,12 @@ const userController = {
             let category = await categoryHelpers.getAllCategory()
             let address = await userHelpers.getAddressDetails()
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
             let userAddress = await addressHelpers.getAllAddress(userId)
             let person = await userHelpers.getUser(users._id)
 
             let add = userAddress.address
-            res.render('user/profile', { user: true, category, userss, users, address, cartCount, person, userAddress, add, passErr: req.session.changePasswordError })
+            res.render('user/profile', { user: true, category, userss, users,wishCount, address, cartCount, person, userAddress, add, passErr: req.session.changePasswordError })
             req.session.changePasswordError = false
         } catch (error) {
             console.log('somthing wrong in profileGet ');
@@ -541,6 +560,7 @@ const userController = {
                 res.redirect('/profile')
             }
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in changePasswordPost ');
         }
     },
@@ -638,6 +658,7 @@ const userController = {
                 }
             })
         } catch (error) {
+            res.redirect('/wrong')
             console.log('somthing wrong in  ');
         }
     },
@@ -666,7 +687,8 @@ const userController = {
             let person = await userHelpers.getUser(userss._id)
             let category = await categoryHelpers.getAllCategory()
             let cartCount = await cartHelpers.getCartCount(req.session.user._id)
-            res.render('user/walletHistory', { user: true, user, userss, person, category, users, cartCount })
+            let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
+            res.render('user/walletHistory', { user: true, user, userss, person,wishCount, category, users, cartCount })
         } catch (error) {
             console.log(error);
             res.redirect('/wrong')
@@ -677,6 +699,46 @@ const userController = {
     wrongGet: async (req, res) => {
         res.render('user/wrong')
     },
+    ////////////////////////////////////////////// wishlist ////////////////////////////////////////////////////////////
+
+    wishListGet: async (req, res) => {
+        let users = req.session.user
+        let Person = req.session.user
+        let person = await userHelpers.getUser(Person._id)
+        const userId = await req.session.user._id
+        let cartCount = await cartHelpers.getCartCount(req.session.user._id)
+        let wishCount = await wishHelpers.getWishListCount(req.session.user._id)
+        let category = await categoryHelpers.getAllCategory()
+        let product = await wishHelpers.getWishListProducts(req.session.user._id)
+        res.render('user/wishlist', { user: true, product, users, person, userId, category, wishCount, cartCount })
+    },
+
+    addToWishListGet: (req, res) => {
+        wishHelpers.addToWishlist(req.params.id, req.session.user._id).then((wishlist) => {
+            if (wishlist.length > 0) {
+                if (res.wishlist) {
+                    console.log('jhjhjhjhhjhj')
+                    res.json({ status: true, wishlist: true })
+
+                } else {
+                    res.json({ status: true, wishlist: false })
+                }
+            }
+
+        })
+    },
+
+
+    WishListRemoveGet: (req, res) => {
+        wishHelpers.removeWishListProduct(req.params.id, req.session.user._id).then((response) => {
+            res.json({ status: true })
+        })
+    },
+
+
+
+
+
 
     ////////////////////////////////////////////// LogOut /////////////////////////////////////////////////////////////
 

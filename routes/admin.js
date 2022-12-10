@@ -30,7 +30,7 @@ router.get('/list-product/:id',verifyLogin1, adminController.listProductGet);
 
 router.get('/list-user',verifyLogin1,adminController.listUserGet);
 
-router.get('/list-category', adminController.listCategoryGet);
+router.get('/list-category',verifyLogin1, adminController.listCategoryGet);
 
 router.get('/list-order',verifyLogin1, adminController.listOrderGet);
 
@@ -62,7 +62,7 @@ router.post('/edit-status/:id',verifyLogin1, adminController.editStatusPost);
 
 router.get('/admin-dashbord',verifyLogin1, adminController.adminDashboardGet);
 
-router.get('/admin-dashbord/day', adminController.adminDashboardGetday);
+router.get('/admin-dashbord/day',verifyLogin1, adminController.adminDashboardGetday);
 
 router.post('/admin-dashbord/graphdata',verifyLogin1, adminController.adminDashboardPostDataGrapgh);
 
@@ -95,7 +95,9 @@ router.post('/edit-categoryOffer/:id',verifyLogin1, adminController.editCategorO
 
 router.get('/delete-categoryOffer/:id',verifyLogin1, adminController.deleteCategorOfferyIdGet);
 
-router.delete('/deleteCoupon',adminController.DeleteCouponDelete);
+router.delete('/deleteCoupon',verifyLogin1,adminController.DeleteCouponDelete);
+
+
 
 router.get('/adminlogout',adminController.adminLogOut);
 

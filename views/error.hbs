@@ -1,15 +1,17 @@
 
 
 
-<div class="error-img"    >
-<img src="https://kfg6bckb.media.zestyio.com/yalantis-interactive-404.gif" style="width:100%;height: 100%;overflow: hidden;" alt="">
+<div class="error-img">
     <div >
       {{#if user}}
             <a href="/user-main"><button class="home-btn text-center text-white bg-dark">Goback to Home</button></a> 
             {{else if admin}}
             <a href="/admin"><button class="home-btn text-center text-white bg-dark">Goback to Home</button></a>
             {{else}}
-            <img src="https://kfg6bckb.media.zestyio.com/yalantis-interactive-404.gif" alt="">
+            <div style="padding-left: 500px;padding-top: 120px;"> 
+            <img style="width: 50%; height: 50%;" src="/images/404 error with a tired person.gif" alt="">
+
+            </div>
       {{/if}}
     </div>
    

@@ -384,7 +384,7 @@ const adminController = {
         try {
             let order = await orderHelpers.getOrderDetails(req.params.id)
             console.log(order, 'ololol');
-            res.render('admin/view-details', { order })
+            res.render('admin/view-details', { order,admin:true })
 
         } catch (error) {
             console.log('somthing wrong in getviewdetails ');

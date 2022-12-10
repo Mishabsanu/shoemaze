@@ -54,8 +54,8 @@ router.get('/show-category/:id',verifyLogin,userController.showCategoryIdGet);
 
 router.get('/view-cart',verifyBlock,verifyLogin,userController.viewCartGet);
 
-router.get('/add-to-cart/:id',verifyLogin,userController.addToCartGet)
-;
+router.get('/add-to-cart/:id',verifyLogin,userController.addToCartGet);
+
 router.patch('/change-product-quantity',verifyLogin,userController.changeProductQuantityPost);
 
 router.get('/place-order',verifyBlock,verifyLogin,userController.placeOrderGet);
@@ -100,8 +100,11 @@ router.get('/walletHistory', userController.viewWalletHistory);
 
 router.get('/wrong', userController.wrongGet);
 
+router.get('/add-to-wishlist/:id',verifyLogin,userController.addToWishListGet);
 
+router.get('/wishlist',verifyLogin,userController.wishListGet);
 
+router.get('/wishlist_removeproduct/:id',verifyLogin,userController.WishListRemoveGet)
 
 module.exports = router;
 

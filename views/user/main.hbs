@@ -15,6 +15,11 @@
 
 {{!-- https://iide.co/wp-content/uploads/2021/09/image6-11.png --}}
 
+<style>
+     .wish{
+        color: red;
+    }
+</style>
 <section class="banner set-bg" data-setbg="https://iide.co/wp-content/uploads/2021/09/image6-11.png)"
     style="background-image: url(https://iide.co/wp-content/uploads/2021/09/image6-11.png);">
     <div class="container">
@@ -79,9 +84,22 @@
                         <p class="label new">{{productOfferPercentage}}<small>%off</small></p>
                         {{/if}}
                         <ul class="product__hover">
+
+
+
                             <li><a href="/assets/product-images/{{this._id}}.jpg" class="image-popup"><span
                                         class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+
+                            {{!-- <li><a href="#"><span class="icon_heart_alt"></span></a></li> --}}
+                            {{#if this.wishlisted }}
+                            <li><a onclick="addToWishlist('{{this._id}}')" class="social-info btn_prod">
+                                    <span id="{{this._id}}wishList" class="icon_heart_alt wish"></span>
+                                </a></li> {{else}}
+                            <li><a onclick="addToWishlist('{{this._id}}')" class="social-info btn_prod">
+                                    <span id="{{this._id}}wishList" class="icon_heart_alt "></span>
+                                </a></li>
+                            {{/if}}
+
                             <li><a><button onclick="addToCart('{{this._id}}')"><span
                                             class="icon_bag_alt"></span></button></a></li>
                         </ul>
@@ -168,7 +186,7 @@
                     $("#cart-count").html(count);
                     Swal.fire({
                         icon: "success",
-                        title: "Item added to Cart",
+                        title: "Item Added to Cart",
                         showConfirmButton: false,
                         timer: 1000,
                     }).then(() => {
@@ -204,5 +222,45 @@
                 }
             },
         });
+    }
+</script>
+
+
+
+<script>
+    function addToWishlist(proId) {
+        let id = proId + 'wishList'
+        var btn = document.getElementById(id)
+        swal({
+            icon: "success",
+            title: "Item Added to WishList",
+            timer: 2000,
+        }).then(() => {
+            location.reload()
+        })
+        $.ajax({
+            url: '/add-to-wishlist/' + proId,
+            method: 'get',
+            success: (response) => {
+                if (response.status) {
+                    console.log(response.wishlist)
+                    if (response.wishlist) {
+                        btn.classList.add('wish')
+                        swal({
+                            icon: "success",
+                            title: "Item Added to WishList",
+                            showConfirmButton: false,
+                            timer: 1000,
+                        }).then(() => {
+                            location.reload()
+                        })
+                    } else {
+                        btn.classList.remove('wish')
+                    }
+                } else {
+                    location.href = "/login";
+                }
+            }
+        })
     }
 </script>
