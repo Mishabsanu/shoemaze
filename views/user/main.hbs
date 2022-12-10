@@ -231,7 +231,7 @@
     function addToWishlist(proId) {
         let id = proId + 'wishList'
         var btn = document.getElementById(id)
-        swal({
+         Swal.fire({
             icon: "success",
             title: "Item Added to WishList",
             timer: 2000,
@@ -246,7 +246,7 @@
                     console.log(response.wishlist)
                     if (response.wishlist) {
                         btn.classList.add('wish')
-                        swal({
+                         Swal.fire({
                             icon: "success",
                             title: "Item Added to WishList",
                             showConfirmButton: false,
